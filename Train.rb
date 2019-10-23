@@ -31,6 +31,15 @@ class Train
     current_speed
   end
 
+  def decrease_speed_by(km)
+    @current_speed -= km
+    if @current_speed < 0
+      @current_speed = 0
+      puts "Train had already stopped. It can`t decrease it`s speed any more."
+    end
+    current_speed
+  end
+
   private :check_train_type, :generate_train_number
 end
 
@@ -43,3 +52,7 @@ puts "Train current speed is: #{train_1.current_speed} km/h"
 train_1.increase_speed_by 50
 puts "Train current speed is: #{train_1.current_speed} km/h"
 train_1.increase_speed_by 100
+
+train_1.decrease_speed_by(80)
+puts "Train current speed is: #{train_1.current_speed} km/h"
+train_1.decrease_speed_by 80
