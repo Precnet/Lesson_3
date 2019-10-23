@@ -22,6 +22,15 @@ class Train
     train_type
   end
 
+  def increase_speed_by(km)
+    @current_speed += km
+    if @current_speed > 120
+      @current_speed = 120
+      puts "Train is at it`s maximum speed - 120kmh. It can`t increase it`s speed any more."
+    end
+    current_speed
+  end
+
   private :check_train_type, :generate_train_number
 end
 
