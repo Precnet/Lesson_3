@@ -8,7 +8,6 @@ class Train
     @number_of_carriages = number_of_carriages
     # check train type
     @train_type = check_train_type(train_type)
-
     @current_speed = 0
   end
 
@@ -40,6 +39,14 @@ class Train
     current_speed
   end
 
+  def stop
+    @current_speed = 0
+  end
+
+  def add_carriage
+    if @current_speed == 0 then @number_of_carriages += 1 else puts 'Can`t add new carriages while train is moving.' end
+  end
+
   private :check_train_type, :generate_train_number
 end
 
@@ -56,3 +63,10 @@ train_1.increase_speed_by 100
 train_1.decrease_speed_by(80)
 puts "Train current speed is: #{train_1.current_speed} km/h"
 train_1.decrease_speed_by 80
+
+puts "Number of carriages in train: #{train_1.number_of_carriages}"
+train_1.increase_speed_by 5
+train_1.add_carriage
+train_1.stop
+train_1.add_carriage
+puts "Number of carriages in train: #{train_1.number_of_carriages}"
