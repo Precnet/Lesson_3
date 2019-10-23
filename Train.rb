@@ -47,10 +47,16 @@ class Train
     if @current_speed == 0 then @number_of_carriages += 1 else puts 'Can`t add new carriages while train is moving.' end
   end
 
+  def remove_carriage
+    if @number_of_carriages > 0 then @number_of_carriages -= 1 else puts 'There are no carriages to remove.' end
+  end
+
   private :check_train_type, :generate_train_number
 end
 
+
 train_1 = Train.new('cargo', 10)
+
 puts "Train number: #{train_1.train_number}"
 puts "Train type: #{train_1.train_type}"
 puts "Number of carriages in train: #{train_1.number_of_carriages}"
