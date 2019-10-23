@@ -26,7 +26,7 @@ class Train
     @current_speed += km
     if @current_speed > 120
       @current_speed = 120
-      puts "Train is at it`s maximum speed - 120kmh. It can`t increase it`s speed any more."
+      puts "Train is at it`s maximum speed - 120km/h. It can`t safely increase it`s speed any more."
     end
     current_speed
   end
@@ -38,3 +38,8 @@ train_1 = Train.new('cargo', 10)
 puts "Train number: #{train_1.train_number}"
 puts "Train type: #{train_1.train_type}"
 puts "Number of carriages in train: #{train_1.number_of_carriages}"
+
+puts "Train current speed is: #{train_1.current_speed} km/h"
+train_1.increase_speed_by 50
+puts "Train current speed is: #{train_1.current_speed} km/h"
+train_1.increase_speed_by 100
