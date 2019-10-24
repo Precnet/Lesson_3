@@ -1,5 +1,5 @@
 class Route
-  def initialise(first_station, last_station)
+  def initialize(first_station, last_station)
     @stations = [first_station, last_station]
   end
 
@@ -7,3 +7,5 @@ class Route
     puts @stations.join(' => ')
   end
 end
+
+route = Route.new('first', 'last')
