@@ -64,10 +64,12 @@ class Train
   def move_forward
     event_no_route = 'Train can`t move without any route!'
     return event_no_route unless @route
-    event_last_station = 'Train is already at it`s final station and can`t move further!'
-    return event_last_station if @route.stations.find_index(@current__station) == @route.stations.length - 1
 
-    @current__station = @route.stations[@route.stations.find_index(@current__station) + 1]
+    current_station_index = @route.stations.find_index(@current__station)
+    event_last_station = 'Train is already at it`s final station and can`t move further!'
+    return event_last_station if current_station_index == @route.stations.length - 1
+
+    @current__station = @route.stations[current_station_index + 1]
     "Train arrived at next station! Current station is #{@current__station}"
   end
 
@@ -115,5 +117,4 @@ route.add_station('Third')
 
 train_1.set_route(route)
 puts train_1.current__station
-
 puts train_1.move_forward
