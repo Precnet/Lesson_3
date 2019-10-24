@@ -9,7 +9,9 @@ class Train
     # check train type
     @train_type = check_train_type(train_type)
     @current_speed = 0
+    # route and station management
     @current__station = nil
+    @route = nil
   end
 
   def generate_train_number(number_length)
@@ -50,6 +52,10 @@ class Train
 
   def remove_carriage
     if @number_of_carriages > 0 then @number_of_carriages -= 1 else puts 'There are no carriages to remove.' end
+  end
+
+  def set_route
+
   end
 
   def get_previous_station
