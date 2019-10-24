@@ -118,6 +118,7 @@ class Train
   end
 
   private :generate_train_number, :check_train_type, :previous_station_index, :next_station_index,
-          :current_station_index, :next_station_available?, :previous_station_available?, :check_route
+          :current_station_index, :next_station_available?, :previous_station_available?, :check_route,
+          :check_number_of_carriages
 
 end
