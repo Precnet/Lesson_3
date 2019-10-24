@@ -59,7 +59,8 @@ class Train
   end
 
   def remove_carriage
-    if @number_of_carriages > 0 then @number_of_carriages -= 1 else puts 'There are no carriages to remove.' end
+    raise RuntimeError, 'There are no carriages to remove.' unless @number_of_carriages > 0
+    @number_of_carriages -= 1
   end
 
   def set_route(route)
