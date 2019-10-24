@@ -59,7 +59,17 @@ class Train
     @current__station = route.stations[0]
   end
 
+  def move_forward
+    event_no_route = 'Train can`t move without any route!'
+    return event_no_route unless @route
+    event_last_station = 'Train is already at it`s final station and can`t move further!'
+    return event_last_station if @route.find_index(@current__station) == @route.length - 1
 
+  end
+
+  def move_backward
+    puts 'Train can`t move without any route!' unless @route
+  end
 
   def get_previous_station
 
