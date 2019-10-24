@@ -21,8 +21,8 @@ class Train
   end
 
   def check_train_type(train_type)
-    errorMessage = "Wrong type of a train! Should be 'cargo' or 'passenger'. Got - '#{train_type}'"
-    raise ArgumentError, errorMessage unless %w(passenger cargo).include? train_type
+    event_wrong_train_type = "Wrong type of a train! Should be 'cargo' or 'passenger'. Got - '#{train_type}'"
+    raise ArgumentError, event_wrong_train_type  unless %w(passenger cargo).include? train_type
     train_type
   end
 
