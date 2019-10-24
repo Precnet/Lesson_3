@@ -2,17 +2,19 @@ require 'rspec'
 require_relative '../Train.rb'
 
 describe Train do
-  context '' do
-
-  end
-  it 'should create simple object' do
-    train = Train.new('cargo', 10)
-    expect(train.train_type).to eq('cargo')
-    expect(train.train_number.length).to eq(10)
-  end
-  it 'should create object with custom name' do
+  it 'should create object with custom train number' do
     train = Train.new('cargo', 10, 'some_name')
     expect(train.train_number).to eq('some_name')
+  end
+  it 'should create random name if no one was provided' do
+    train_1 = Train.new('cargo', 10)
+    train_2 = Train.new('cargo', 10)
+    expect(train_1.train_number).not_to eq(train_2.train_number)
+  end
+  it 'shouldn`t create Trains with non Integer number of carriages' do
+    expect { train = Train.new('cargo', '10') }.to raise_error(ArgumentError)
+    expect { train = Train.new('cargo', ['10']) }.to raise_error(ArgumentError)
+    expect { train = Train.new('cargo', {number: 10}) }.to raise_error(ArgumentError)
   end
 end
 
