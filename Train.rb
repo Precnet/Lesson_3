@@ -1,3 +1,5 @@
+require_relative 'Route'
+
 class Train
   attr_accessor :number_of_carriages
   attr_reader :train_number, :train_type, :current_speed, :current__station
@@ -63,9 +65,9 @@ class Train
     event_no_route = 'Train can`t move without any route!'
     return event_no_route unless @route
     event_last_station = 'Train is already at it`s final station and can`t move further!'
-    return event_last_station if @route.find_index(@current__station) == @route.length - 1
+    return event_last_station if @route.stations.find_index(@current__station) == @route.length - 1
 
-    @current__station = @route[@route.find_index(@current__station) + 1]
+    @current__station = @route[@route.stations.find_index(@current__station) + 1]
     "Train arrived at next station! Current station is #{@current__station}"
   end
 
@@ -106,3 +108,12 @@ train_1.add_carriage
 train_1.stop
 train_1.add_carriage
 puts "Number of carriages in train: #{train_1.number_of_carriages}"
+
+route = Route.new('first', 'last')
+route.add_station('second')
+route.add_station('third')
+
+train_1.set_route(route)
+puts train_1.current__station
+
+puts train_1.move_forward
