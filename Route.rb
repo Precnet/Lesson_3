@@ -10,6 +10,9 @@ class Route
   end
 
   def add_station(new_station)
+    # check for duplication
+    duplicate_station_message = 'Can`t add duplicate station to the route!'
+    raise ArgumentError, duplicate_station_message if @stations.find_index(new_station)
     @stations.insert(-2, new_station)
   end
 
@@ -22,3 +25,5 @@ route.add_station('second')
 route.show_route
 route.add_station('third')
 route.show_route
+# error
+# route.add_station('second')
