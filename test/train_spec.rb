@@ -20,6 +20,14 @@ describe Train do
   it 'shouldn`t create Trains with number of carriages less than zero' do
     expect { train = Train.new('passenger', -4) }.to raise_error(ArgumentError)
   end
+  it 'should create only Trains of cargo and passenger types' do
+    expect { train = Train.new('passenger', 10) }.not_to raise_error
+    expect { train = Train.new('cargo', 10) }.not_to raise_error
+    expect { train = Train.new('Passenger', 10) }.to raise_error(ArgumentError)
+    expect { train = Train.new(10, 10) }.to raise_error(ArgumentError)
+    expect { train = Train.new('personal', 10) }.to raise_error(ArgumentError)
+    expect { train = Train.new(nil, 10) }.to raise_error(ArgumentError)
+  end
 end
 
 # describe Train do
