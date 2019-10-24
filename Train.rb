@@ -65,7 +65,8 @@ class Train
     event_last_station = 'Train is already at it`s final station and can`t move further!'
     return event_last_station if @route.find_index(@current__station) == @route.length - 1
 
-
+    @current__station = @route[@route.find_index(@current__station) + 1]
+    "Train arrived at next station! Current station is #{@current__station}"
   end
 
   def move_backward
