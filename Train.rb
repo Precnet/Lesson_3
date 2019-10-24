@@ -22,6 +22,7 @@ class Train
     event_wrong_number_carriages = "Number of carriages should be positive Integer. Got: #{number_of_carriages}"
     raise ArgumentError, event_wrong_number_carriages unless
         number_of_carriages.is_a?(Integer) && number_of_carriages >= 0
+    number_of_carriages
   end
 
   def check_train_type(train_type)
