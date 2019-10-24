@@ -18,12 +18,12 @@ class Route
 
 end
 
-route = Route.new('first', 'last')
-route.show_route
-
-route.add_station('second')
-route.show_route
-route.add_station('third')
-route.show_route
+# route = Route.new('first', 'last')
+# route.show_route
+#
+# route.add_station('second')
+# route.show_route
+# route.add_station('third')
+# route.show_route
 # error
 # route.add_station('second')
