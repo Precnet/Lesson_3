@@ -118,7 +118,8 @@ class Train
   end
 
   def get_next_station
-
+    raise RuntimeError, 'Can`t get next station for last station!' unless next_station_available?
+    @route.stations[next_station_index]
   end
 
   private :generate_train_number, :check_train_type, :previous_station_index, :next_station_index,
