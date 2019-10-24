@@ -67,7 +67,7 @@ class Train
     event_last_station = 'Train is already at it`s final station and can`t move further!'
     return event_last_station if @route.stations.find_index(@current__station) == @route.stations.length - 1
 
-    @current__station = @route[@route.stations.find_index(@current__station) + 1]
+    @current__station = @route.stations[@route.stations.find_index(@current__station) + 1]
     "Train arrived at next station! Current station is #{@current__station}"
   end
 
@@ -109,9 +109,9 @@ train_1.stop
 train_1.add_carriage
 puts "Number of carriages in train: #{train_1.number_of_carriages}"
 
-route = Route.new('first', 'last')
-route.add_station('second')
-route.add_station('third')
+route = Route.new('First', 'Last')
+route.add_station('Second')
+route.add_station('Third')
 
 train_1.set_route(route)
 puts train_1.current__station
