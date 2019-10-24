@@ -53,7 +53,8 @@ class Train
   end
 
   def add_carriage
-    if @current_speed == 0 then @number_of_carriages += 1 else puts 'Can`t add new carriages while train is moving.' end
+    raise RuntimeError, 'Can`t add new carriages while train is moving.' unless @current_speed == 0
+    @number_of_carriages += 1
   end
 
   def remove_carriage
