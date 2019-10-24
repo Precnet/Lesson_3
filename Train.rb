@@ -65,7 +65,7 @@ class Train
     event_no_route = 'Train can`t move without any route!'
     return event_no_route unless @route
     event_last_station = 'Train is already at it`s final station and can`t move further!'
-    return event_last_station if @route.stations.find_index(@current__station) == @route.length - 1
+    return event_last_station if @route.stations.find_index(@current__station) == @route.stations.length - 1
 
     @current__station = @route[@route.stations.find_index(@current__station) + 1]
     "Train arrived at next station! Current station is #{@current__station}"
