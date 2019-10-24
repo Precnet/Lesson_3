@@ -56,8 +56,10 @@ class Train
 
   def set_route(route)
     @route = route
-    @current__station = route
+    @current__station = route.stations[0]
   end
+
+
 
   def get_previous_station
 
