@@ -61,7 +61,8 @@ class Train
 
   def move_forward
     check_route
-    check_next_station
+    event_no_next_station = 'Train is already at it`s final station and can`t move further!'
+    raise event_no_next_station unless next_station_available?
 
     @current_station = @route.stations[next_station_index]
     "Train had arrived at next station! Current station is #{@current_station}"
@@ -72,10 +73,9 @@ class Train
     raise event_no_route unless @route
   end
 
-  def check_next_station
+  def next_station_available?
     last_station_index = @route.stations.length - 1
-    event_no_next_station = 'Train is already at it`s final station and can`t move further!'
-    raise event_no_next_station if current_station_index == last_station_index
+    current_station_index == last_station_index
   end
 
   def current_station_index
@@ -92,15 +92,15 @@ class Train
 
   def move_backward
     check_route
-    check_previous_station
+    event_no_previous_station = 'Train is already at it`s first station and can`t move backward!'
+    raise event_no_previous_station unless previous_station_available?
 
     @current_station = @route.stations[previous_station_index]
     "Train had arrived at previous station! Current station is #{@current_station}"
   end
 
-  def check_previous_station
-    event_no_previous_station = 'Train is already at it`s first station and can`t move backward!'
-    raise event_no_previous_station if current_station_index == 0
+  def previous_station_available?
+    current_station_index == 0
   end
 
   def get_previous_station
@@ -112,7 +112,7 @@ class Train
   end
 
   private :generate_train_number, :check_train_type, :previous_station_index, :next_station_index,
-          :current_station_index, :check_next_station, :check_previous_station, :check_route
+          :current_station_index, :next_station_available?, :previous_station_available?, :check_route
 
 end
 
@@ -125,8 +125,8 @@ puts "Number of carriages in train: #{train_1.number_of_carriages}"
 
 puts "Train current speed is: #{train_1.current_speed} km/h"
 train_1.increase_speed_by 50
-puts "Train current speed is: #{train_1.current_speed} km/h"
-train_1.increase_speed_by 100
+# puts "Train current speed is: #{train_1.current_speed} km/h"
+# train_1.increase_speed_by 100
 
 train_1.decrease_speed_by(80)
 puts "Train current speed is: #{train_1.current_speed} km/h"
