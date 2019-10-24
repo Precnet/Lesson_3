@@ -62,33 +62,38 @@ class Train
   end
 
   def move_forward
-    check_if_route_is_available
-    check_if_next_station_is_available
+    check_route
+    check_next_station
 
-    next_station_index = @route.stations.find_index(@current__station) + 1
+    next_station_index = current_station_index + 1
     @current__station = @route.stations[next_station_index]
     "Train had arrived at next station! Current station is #{@current__station}"
   end
 
-  def check_if_route_is_available
+  def check_route
     event_no_route = 'Train can`t move without any route! You need to set route first.'
     raise event_no_route unless @route
   end
 
-  def check_if_next_station_is_available
-    current_station_index = @route.stations.find_index(@current__station)
+  def check_next_station
     last_station_index = @route.stations.length - 1
     event_no_next_station = 'Train is already at it`s final station and can`t move further!'
     raise event_no_next_station if current_station_index == last_station_index
   end
 
+  def current_station_index
+    @route.stations.find_index(@current__station)
+  end
+
   def move_backward
-    check_if_route_is_available
+    check_route
+    check_previous_station
 
-    current_station_index = @route.stations.find_index(@current__station)
-    event_first_station = 'Train is already at it`s first station and can`t move backward!'
-    return event_first_station if current_station_index == 0
+  end
 
+  def check_previous_station
+    event_no_previous_station = 'Train is already at it`s first station and can`t move backward!'
+    raise event_no_previous_station if current_station_index == 0
   end
 
   def get_previous_station
