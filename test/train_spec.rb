@@ -63,9 +63,16 @@ describe Train do
     before(:all) do
       @train = Train.new('cargo', 10)
     end
-    it 'should increase number of carriages if speed is 0' do
+    it 'should increase number of carriages only if speed is 0' do
       @train.add_carriage
       expect(@train.number_of_carriages).to eq(11)
+      @train.increase_speed_by(10)
+      expect { @train.add_carriage }.to raise_error(RuntimeError)
+    end
+    it 'should decrease number of carriages by 1 if there are any' do
+      11.times { @train.remove_carriage }
+      expect(@train.number_of_carriages).to eq(0)
+      expect { @train.remove_carriage }.to raise_error(RuntimeError)
     end
   end
 
