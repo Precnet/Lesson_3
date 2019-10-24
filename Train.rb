@@ -54,8 +54,9 @@ class Train
     if @number_of_carriages > 0 then @number_of_carriages -= 1 else puts 'There are no carriages to remove.' end
   end
 
-  def set_route
-
+  def set_route(route)
+    @route = route
+    @current__station = route
   end
 
   def get_previous_station
