@@ -52,6 +52,11 @@ describe Train do
     it 'shouldn`t decrease current speed to less than 0' do
       expect(@train.decrease_speed_by(100)).to eq(0)
     end
+    it 'should stop by reducing speed to 0' do
+      @train.increase_speed_by(10)
+      @train.stop
+      expect(@train.current_speed).to eq(0)
+    end
   end
 end
 # train_1 = Train.new('cargo', 10)
