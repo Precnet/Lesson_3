@@ -15,6 +15,10 @@ describe Train do
     expect { train = Train.new('cargo', '10') }.to raise_error(ArgumentError)
     expect { train = Train.new('cargo', ['10']) }.to raise_error(ArgumentError)
     expect { train = Train.new('cargo', {number: 10}) }.to raise_error(ArgumentError)
+    expect { train = Train.new('cargo', 10.1) }.to raise_error(ArgumentError)
+  end
+  it 'shouldn`t create Trains with number of carriages less than zero' do
+    expect { train = Train.new('passenger', -4) }.to raise_error(ArgumentError)
   end
 end
 
