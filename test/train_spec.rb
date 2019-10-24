@@ -15,13 +15,13 @@ describe Train do
       train_2 = Train.new('cargo', 10)
       expect(train_1.train_number).not_to eq(train_2.train_number)
     end
-    it 'shouldn`t create Trains with non Integer number of carriages' do
+    it 'should create Trains with positive Integer number of carriages' do
+      train = Train.new('cargo', 10)
+      expect(train.number_of_carriages).to eq(10)
       expect { train = Train.new('cargo', '10') }.to raise_error(ArgumentError)
       expect { train = Train.new('cargo', ['10']) }.to raise_error(ArgumentError)
       expect { train = Train.new('cargo', {number: 10}) }.to raise_error(ArgumentError)
       expect { train = Train.new('cargo', 10.1) }.to raise_error(ArgumentError)
-    end
-    it 'shouldn`t create Trains with number of carriages less than zero' do
       expect { train = Train.new('passenger', -4) }.to raise_error(ArgumentError)
     end
     it 'should create only Trains of cargo and passenger types' do
@@ -34,7 +34,7 @@ describe Train do
     end
   end
 
-  context '#speed' do
+  context 'speed manipulation' do
     before(:all) do
       @train = Train.new('cargo', 10)
     end
@@ -58,6 +58,17 @@ describe Train do
       expect(@train.current_speed).to eq(0)
     end
   end
+
+  context 'carriages manipulation' do
+    before(:all) do
+      @train = Train.new('cargo', 10)
+    end
+    it 'should increase number of carriages if speed is 0' do
+      @train.add_carriage
+      expect(@train.number_of_carriages).to eq(11)
+    end
+  end
+
 end
 # train_1 = Train.new('cargo', 10)
 #
