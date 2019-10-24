@@ -4,8 +4,9 @@ class Route
   end
 
   def show_route
-    puts @stations.join(' => ')
+    puts 'Route: ' + @stations.join(' => ')
   end
 end
 
 route = Route.new('first', 'last')
+route.show_route
