@@ -2,21 +2,19 @@ require_relative 'Route'
 
 class Train
   attr_accessor :number_of_carriages
-  attr_reader :train_number, :train_type, :current_speed, :current__station
+  attr_reader :train_number, :train_type, :current_speed, :current_station
 
   def initialize(train_type, number_of_carriages, train_number = generate_train_number(10))
-    # nice little magick with converting int to str with Base36
     @train_number = train_number
     @number_of_carriages = number_of_carriages
-    # check train type
     @train_type = check_train_type(train_type)
     @current_speed = 0
-    # route and station management
-    @current__station = nil
+    @current_station = nil
     @route = nil
   end
 
   def generate_train_number(number_length)
+    # nice little magick with converting int to str with Base36
     rand(36 ** number_length).to_s(36)
   end
 
@@ -58,16 +56,15 @@ class Train
 
   def set_route(route)
     @route = route
-    @current__station = route.stations[0]
+    @current_station = route.stations[0]
   end
 
   def move_forward
     check_route
     check_next_station
 
-    next_station_index = current_station_index + 1
-    @current__station = @route.stations[next_station_index]
-    "Train had arrived at next station! Current station is #{@current__station}"
+    @current_station = @route.stations[next_station_index]
+    "Train had arrived at next station! Current station is #{@current_station}"
   end
 
   def check_route
@@ -82,13 +79,23 @@ class Train
   end
 
   def current_station_index
-    @route.stations.find_index(@current__station)
+    @route.stations.find_index(@current_station)
+  end
+
+  def next_station_index
+    current_station_index + 1
+  end
+
+  def previous_station_index
+    current_station_index - 1
   end
 
   def move_backward
     check_route
     check_previous_station
 
+    @current_station = @route.stations[previous_station_index]
+    "Train had arrived at previous station! Current station is #{@current_station}"
   end
 
   def check_previous_station
@@ -104,7 +111,9 @@ class Train
 
   end
 
-  private :check_train_type, :generate_train_number
+  private :generate_train_number, :check_train_type, :previous_station_index, :next_station_index,
+          :current_station_index, :check_next_station, :check_previous_station, :check_route
+
 end
 
 
@@ -135,5 +144,5 @@ route.add_station('Second')
 route.add_station('Third')
 
 train_1.set_route(route)
-puts train_1.current__station
+puts train_1.current_station
 puts train_1.move_forward
