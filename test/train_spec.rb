@@ -2,13 +2,17 @@ require 'rspec'
 require_relative '../Train.rb'
 
 describe Train do
-  context  do
+  context '' do
 
   end
-  it 'should create object' do
+  it 'should create simple object' do
     train = Train.new('cargo', 10)
-    expect(train.train_type).to 'cargo'
-    expect(train.train_number.length).to 10
+    expect(train.train_type).to eq('cargo')
+    expect(train.train_number.length).to eq(10)
+  end
+  it 'should create object with custom name' do
+    train = Train.new('cargo', 10, 'some_name')
+    expect(train.train_number).to eq('some_name')
   end
 end
 
