@@ -13,4 +13,16 @@ describe 'Station' do
     expect { Station.new('') }.to raise_error(ArgumentError)
     expect { Station.new('very-very-very long station name') }.to raise_error(ArgumentError)
   end
+  context 'trains manipulations' do
+    before(:all) do
+      @station = Station.new('some_station')
+    end
+    it 'should add trains to station one by one' do
+      @station.train_arrived
+      expect(@station.trains_at_station).to eq(1)
+      @station.train_arrived
+      @station.train_arrived
+      expect(@station.trains_at_station).to eq(3)
+    end
+  end
 end
