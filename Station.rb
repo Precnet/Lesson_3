@@ -3,7 +3,7 @@ class Station
 
   def initialize(station_name)
     @station_name = check_station_name(station_name)
-    @trains_at_station = 0
+    @trains_at_station = []
   end
 
   def check_station_name(name)
@@ -14,8 +14,12 @@ class Station
     name
   end
 
-  def train_arrived
-    @trains_at_station += 1
+  def train_arrived(new_train)
+    @trains_at_station.push(new_train)
+  end
+
+  def trains_at_station_of_type(train_type)
+
   end
 
   private :check_station_name
