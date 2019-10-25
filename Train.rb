@@ -113,11 +113,13 @@ class Train
   end
 
   def get_previous_station
+    check_route
     raise RuntimeError, 'Can`t get previous station for first station!' unless previous_station_available?
     @route.stations[previous_station_index]
   end
 
   def get_next_station
+    check_route
     raise RuntimeError, 'Can`t get next station for last station!' unless next_station_available?
     @route.stations[next_station_index]
   end
