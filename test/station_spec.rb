@@ -48,9 +48,13 @@ describe 'Station' do
       @station.send_train('003')
     end
     it 'should return trains currently at station' do
-      # train = double('Train', train_type: 'cargo', train_number: '001')
-      # @station.train_arrived(train)
-      # expect(@station.trains_at_station).to eq([train])
+      train_1 = double('Train', train_type: 'cargo', train_number: '001')
+      train_2 = double('Train', train_type: 'passenger', train_number: '002')
+      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      @station.train_arrived(train_1)
+      @station.train_arrived(train_2)
+      @station.train_arrived(train_3)
+      expect(@station.trains_at_station).to eq([train_1, train_2, train_3])
     end
   end
 end
