@@ -10,14 +10,6 @@ describe 'Route' do
     expect(@route.stations[0]).to eq('first')
     expect(@route.stations[1]).to eq('last')
   end
-  it 'should correctly display string representation of route' do
-    expect { @route.show_route }.to output("Route: first => last\n").to_stdout
-    expect { @route.show_route }.not_to output("Route: last <= first\n").to_stdout
-    station_added_message = "Route: first => intermediate => last\n"
-    @route.add_station('intermediate')
-    expect { @route.show_route }.to output(station_added_message).to_stdout
-    @route.delete_station('intermediate')
-  end
   it 'should add intermediate station to route' do
     @route.add_station('new_station')
     expect(@route.stations[1]).to eq('new_station')
