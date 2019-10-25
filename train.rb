@@ -1,5 +1,7 @@
 # require_relative 'Route'
 
+TRAIN_TYPES = %w(passenger cargo)
+
 class Train
   attr_accessor :number_of_carriages
   attr_reader :train_number, :train_type, :current_speed, :current_station
@@ -23,7 +25,7 @@ class Train
   end
   private def check_train_type(train_type)
     event_wrong_train_type = "Wrong type of a train! Should be 'cargo' or 'passenger'. Got - '#{train_type}'"
-    raise ArgumentError, event_wrong_train_type  unless %w(passenger cargo).include? train_type
+    raise ArgumentError, event_wrong_train_type  unless TRAIN_TYPES.include? train_type
     train_type
   end
   def increase_speed_by(km)
