@@ -26,6 +26,6 @@ describe 'Route' do
     @route.delete_station('wrong_station')
     expect(@route.stations.length).to eq(3)
     expect(@route.stations[-2]).to eq('new_station')
-    @route.delete_station('one_more_wrong_station').to raise_error(ArgumentError)
+    expect { @route.delete_station('one_more_wrong_station') }.to raise_error(ArgumentError)
   end
 end
