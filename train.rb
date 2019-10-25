@@ -32,7 +32,7 @@ class Train
     @current_speed += km
     if @current_speed > 120
       @current_speed = 120
-      puts "Train is at it`s maximum speed - 120km/h. It can`t safely increase it`s speed any more."
+      # puts "Train is at it`s maximum speed - 120km/h. It can`t safely increase it`s speed any more."
     end
     current_speed
   end
@@ -40,7 +40,7 @@ class Train
     @current_speed -= km
     if @current_speed < 0
       @current_speed = 0
-      puts "Train had already stopped. It can`t decrease it`s speed any more."
+      # puts "Train had already stopped. It can`t decrease it`s speed any more."
     end
     current_speed
   end
