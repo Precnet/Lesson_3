@@ -21,7 +21,7 @@ class Station
   end
 
   def trains_at_station_of_type(train_type)
-
+    @trains_at_station.select {|train| train if train.train_type == train_type}.map { |train| train.train_number}
   end
 
   def send_train(train_number)
