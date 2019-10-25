@@ -25,7 +25,10 @@ class Station
   end
 
   def trains_at_station_by_type
-    @trains_at_station.map { |train| train.train_number}
+    result = {}
+    trains_at_station_types = @trains_at_station.map { |train| train.train_type}
+    trains_at_station_types.uniq.each {|type| result[type] = trains_at_station_types.count(type)}
+    result
   end
 
   def send_train(train_number)
