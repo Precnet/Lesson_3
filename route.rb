@@ -3,9 +3,6 @@ class Route
   def initialize(first_station, last_station)
     @stations = [first_station, last_station]
   end
-  def show_route
-    puts 'Route: ' + @stations.join(' => ')
-  end
   def add_station(new_station)
     # check for duplication
     duplicate_station_message = 'Can`t add duplicate stations to the route!'
