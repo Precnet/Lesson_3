@@ -15,7 +15,7 @@ class Station
   end
 
   def train_arrived
-
+    @trains_at_station += 1
   end
 
   private :check_station_name
