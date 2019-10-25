@@ -18,11 +18,15 @@ describe 'Station' do
       @station = Station.new('some_station')
     end
     it 'should add trains to station one by one' do
-      @station.train_arrived
-      expect(@station.trains_at_station).to eq(1)
-      @station.train_arrived
-      @station.train_arrived
-      expect(@station.trains_at_station).to eq(3)
+      train_1 = double('Train', train_type: 'cargo')
+      train_2 = double('Train', train_type: 'passenger')
+      train_3 = double('Train', train_type: 'cargo')
+      @station.train_arrived(train_1)
+      expect(@station.trains_at_station.length).to eq(1)
+      @station.train_arrived(train_2)
+      @station.train_arrived(train_3)
+      expect(@station.trains_at_station.length).to eq(3)
+      expect(@station.trains_at_station[1].train_type).to eq('passenger')
     end
   end
 end
