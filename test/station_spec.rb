@@ -42,7 +42,7 @@ describe 'Station' do
       @station.train_arrived(train_3)
       expect(@station.trains_at_station.length).to eq(3)
       expect(@station.trains_at_station[1].train_type).to eq('passenger')
-      # not sure its necessary, but cleaning up doubles
+      # cleaning up
       @station.send_train('001')
       @station.send_train('002')
       @station.send_train('003')
@@ -55,6 +55,13 @@ describe 'Station' do
       @station.train_arrived(train_2)
       @station.train_arrived(train_3)
       expect(@station.trains_at_station).to eq([train_1, train_2, train_3])
+      @station.send_train('001')
+      @station.send_train('002')
+      @station.send_train('003')
+      expect(@station.trains_at_station).to eq([])
+    end
+    it 'should display trains by type' do
+
     end
   end
 end
