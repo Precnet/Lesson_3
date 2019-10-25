@@ -69,6 +69,7 @@ describe 'Station' do
       @station.train_arrived(train_3)
       expect(@station.trains_at_station_of_type('cargo')).to eq(%w(001 003))
       expect(@station.trains_at_station_of_type('passenger')).to eq(%w(002))
+      expect(@station.trains_at_station_of_type('some other train type')).to eq([])
     end
   end
 end
