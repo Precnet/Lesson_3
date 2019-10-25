@@ -28,7 +28,9 @@ class Station
     error_message = "There is no train with number '#{train_number}' at station"
     raise ArgumentError, error_message unless train_at_station?(train_number)
 
-    @trains_at_station.delete_at(get_train_index_by(train_number))
+    train_index =  get_train_index_by(train_number)
+    @trains_at_station.delete_at(train_index)
+    @train_numbers.delete_at(train_index)
   end
 
   def train_at_station?(train_number)
