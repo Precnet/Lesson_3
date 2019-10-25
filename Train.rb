@@ -78,7 +78,7 @@ class Train
   end
 
   def check_route
-    event_no_route = 'Train can`t move without any route! You need to set route first.'
+    event_no_route = 'There are no route! You need to set route first.'
     raise event_no_route unless @route
   end
 
