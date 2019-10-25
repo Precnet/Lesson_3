@@ -1,8 +1,9 @@
 class Station
-  attr_reader :station_name, :trains_at_station
+  attr_reader :station_name, :trains_at_station, :max_train_capacity
 
-  def initialize(station_name)
+  def initialize(station_name, max_train_capacity=5)
     @station_name = check_station_name(station_name)
+    @max_train_capacity = 5
     @trains_at_station = 0
   end
 
@@ -12,6 +13,10 @@ class Station
     raise ArgumentError, 'Station name can`t be empty!' unless name.length > 0
     raise ArgumentError, 'Station name is too long! Should be <= 20 symbols.' unless name.length <= 20
     name
+  end
+
+  def train_arrived
+
   end
 
   private :check_station_name
