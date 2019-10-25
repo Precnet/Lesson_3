@@ -24,6 +24,10 @@ class Station
     @trains_at_station.select {|train| train if train.train_type == train_type}.map { |train| train.train_number}
   end
 
+  def trains_at_station_by_type
+    @trains_at_station.map { |train| train.train_number}
+  end
+
   def send_train(train_number)
     error_message = "There is no train with number '#{train_number}' at station"
     raise ArgumentError, error_message unless train_at_station?(train_number)
