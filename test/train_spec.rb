@@ -2,7 +2,6 @@ require 'rspec'
 require_relative '../Train.rb'
 
 
-# There is so much more to do with this tests, but for training purposes its enough
 describe Train do
 
   context '#initialize' do
@@ -73,6 +72,15 @@ describe Train do
       11.times { @train.remove_carriage }
       expect(@train.number_of_carriages).to eq(0)
       expect { @train.remove_carriage }.to raise_error(RuntimeError)
+    end
+  end
+
+  context 'route manipulation' do
+    before(:all) do
+      @train = Train.new('cargo', 10)
+    end
+    it 'shouldn`t perform any route activity without route' do
+
     end
   end
 
