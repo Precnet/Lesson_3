@@ -84,7 +84,7 @@ class Train
 
   def next_station_available?
     last_station_index = @route.stations.length - 1
-    current_station_index == last_station_index
+    current_station_index != last_station_index
   end
 
   def current_station_index
@@ -109,7 +109,7 @@ class Train
   end
 
   def previous_station_available?
-    current_station_index == 0
+    current_station_index != 0
   end
 
   def get_previous_station
