@@ -60,7 +60,7 @@ describe 'Station' do
       @station.send_train('003')
       expect(@station.trains_at_station).to eq([])
     end
-    it 'should display trains by type' do
+    it 'should display trains of type' do
       train_1 = double('Train', train_type: 'cargo', train_number: '001')
       train_2 = double('Train', train_type: 'passenger', train_number: '002')
       train_3 = double('Train', train_type: 'cargo', train_number: '003')
@@ -70,6 +70,27 @@ describe 'Station' do
       expect(@station.trains_at_station_of_type('cargo')).to eq(%w(001 003))
       expect(@station.trains_at_station_of_type('passenger')).to eq(%w(002))
       expect(@station.trains_at_station_of_type('some other train type')).to eq([])
+      @station.send_train('001')
+      @station.send_train('002')
+      @station.send_train('003')
+    end
+    it 'should display trains by type' do
+      train_1 = double('Train', train_type: 'cargo', train_number: '001')
+      train_2 = double('Train', train_type: 'passenger', train_number: '002')
+      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      @station.train_arrived(train_1)
+      @station.train_arrived(train_2)
+      @station.train_arrived(train_3)
+      expect(@station.trains_at_station_by_type).to eq({"cargo"=>2, "passenger"=>1})
+      @station.send_train('002')
+      expect(@station.trains_at_station_by_type).to eq({"cargo"=>2})
+      @station.send_train('001')
+      expect(@station.trains_at_station_by_type).to eq({"cargo"=>1})
+      @station.train_arrived(train_2)
+      expect(@station.trains_at_station_by_type).to eq({"cargo"=>1, "passenger"=>1})
+      @station.send_train('002')
+      @station.send_train('003')
+      expect(@station.trains_at_station_by_type).to eq({})
     end
   end
 end
