@@ -11,17 +11,17 @@ class Train
     @current_station = nil
     @route = nil
   end
-  def generate_train_number(number_length)
+  private def generate_train_number(number_length)
     # nice little magick with converting int to str with Base36
     rand(36 ** number_length).to_s(36)
   end
-  def check_number_of_carriages(number_of_carriages)
+  private def check_number_of_carriages(number_of_carriages)
     event_wrong_number_carriages = "Number of carriages should be positive Integer. Got: #{number_of_carriages}"
     raise ArgumentError, event_wrong_number_carriages unless
         number_of_carriages.is_a?(Integer) && number_of_carriages >= 0
     number_of_carriages
   end
-  def check_train_type(train_type)
+  private def check_train_type(train_type)
     event_wrong_train_type = "Wrong type of a train! Should be 'cargo' or 'passenger'. Got - '#{train_type}'"
     raise ArgumentError, event_wrong_train_type  unless %w(passenger cargo).include? train_type
     train_type
@@ -64,21 +64,21 @@ class Train
     @current_station = @route.stations[next_station_index]
     "Train had arrived at next station! Current station is #{@current_station}"
   end
-  def check_route
+  private def check_route
     event_no_route = 'There are no route! You need to set route first.'
     raise event_no_route unless @route
   end
-  def next_station_available?
+  private def next_station_available?
     last_station_index = @route.stations.length - 1
     current_station_index != last_station_index
   end
-  def current_station_index
+  private def current_station_index
     @route.stations.find_index(@current_station)
   end
-  def next_station_index
+  private def next_station_index
     current_station_index + 1
   end
-  def previous_station_index
+  private def previous_station_index
     current_station_index - 1
   end
   def move_backward
@@ -88,7 +88,7 @@ class Train
     @current_station = @route.stations[previous_station_index]
     "Train had arrived at previous station! Current station is #{@current_station}"
   end
-  def previous_station_available?
+  private def previous_station_available?
     current_station_index != 0
   end
   def get_previous_station
@@ -101,7 +101,4 @@ class Train
     raise RuntimeError, 'Can`t get next station for last station!' unless next_station_available?
     @route.stations[next_station_index]
   end
-  private :generate_train_number, :check_train_type, :previous_station_index, :next_station_index,
-          :current_station_index, :next_station_available?, :previous_station_available?, :check_route,
-          :check_number_of_carriages
 end
