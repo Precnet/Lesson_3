@@ -17,8 +17,20 @@ describe 'Station' do
     before(:all) do
       @station = Station.new('some_station')
     end
-    it 'should send trains one by one' do
-
+    it 'should send trains by one' do
+      train_1 = double('Train', train_type: 'cargo', train_number: '001')
+      train_2 = double('Train', train_type: 'passenger', train_number: '002')
+      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      @station.train_arrived(train_1)
+      @station.train_arrived(train_2)
+      @station.train_arrived(train_3)
+      @station.send_train('001')
+      expect(@station.trains_at_station.length).to eq(2)
+      expect { @station.send_train('004') }.to raise_error(ArgumentError)
+      @station.send_train('002')
+      @station.send_train('003')
+      expect(@station.trains_at_station.length).to eq(0)
+      expect { @station.send_train('some_value') }.to raise_error(ArgumentError)
     end
     it 'should add trains to station one by one' do
       train_1 = double('Train', train_type: 'cargo', train_number: '001')
@@ -30,6 +42,10 @@ describe 'Station' do
       @station.train_arrived(train_3)
       expect(@station.trains_at_station.length).to eq(3)
       expect(@station.trains_at_station[1].train_type).to eq('passenger')
+      # not sure its necessary, but cleaning up doubles
+      @station.send_train('001')
+      @station.send_train('002')
+      @station.send_train('003')
     end
     it 'should return trains currently at station' do
       # train = double('Train', train_type: 'cargo', train_number: '001')
