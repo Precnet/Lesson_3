@@ -61,7 +61,14 @@ describe 'Station' do
       expect(@station.trains_at_station).to eq([])
     end
     it 'should display trains by type' do
-
+      train_1 = double('Train', train_type: 'cargo', train_number: '001')
+      train_2 = double('Train', train_type: 'passenger', train_number: '002')
+      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      @station.train_arrived(train_1)
+      @station.train_arrived(train_2)
+      @station.train_arrived(train_3)
+      expect(@station.trains_at_station_of_type('cargo')).to eq(%w(001 003))
+      expect(@station.trains_at_station_of_type('passenger')).to eq(%w(002))
     end
   end
 end
