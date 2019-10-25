@@ -17,5 +17,15 @@ describe 'Route' do
   it 'should add intermediate station to route' do
     @route.add_station('new_station')
     expect(@route.stations[1]).to eq('new_station')
+    expect(@route.stations.length).to eq(3)
+  end
+  it 'should delete station from route if there is such a station' do
+    @route.add_station('wrong_station')
+    expect(@route.stations.length).to eq(4)
+    expect(@route.stations[-2]).to eq('wrong_station')
+    @route.delete_station('wrong_station')
+    expect(@route.stations.length).to eq(3)
+    expect(@route.stations[-2]).to eq('new_station')
+    @route.delete_station('one_more_wrong_station').to raise_error(ArgumentError)
   end
 end
