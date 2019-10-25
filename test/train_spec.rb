@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../Train.rb'
+require_relative '../train.rb'
 
 
 describe Train do

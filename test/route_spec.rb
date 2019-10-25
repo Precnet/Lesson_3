@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../Route.rb'
+require_relative '../route.rb'
 
 describe 'Route' do
   before(:all) do

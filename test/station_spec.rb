@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../Station.rb'
+require_relative '../station.rb'
 
 describe 'Station' do
   it 'should create station with custom name' do
