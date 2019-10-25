@@ -1,9 +1,8 @@
 class Station
-  attr_reader :station_name, :trains_at_station, :max_train_capacity
+  attr_reader :station_name, :trains_at_station
 
-  def initialize(station_name, max_train_capacity=5)
+  def initialize(station_name)
     @station_name = check_station_name(station_name)
-    @max_train_capacity = 5
     @trains_at_station = 0
   end
 
