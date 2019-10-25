@@ -16,6 +16,15 @@ class Route
     @stations.insert(-2, new_station)
   end
 
+  def delete_station(station)
+    raise ArgumentError, "There is no station #{station} in current route!" unless there_is_such_station?(station)
+    @stations.delete_at(@stations.find_index(station))
+  end
+
+  def there_is_such_station?(station)
+    @stations.include? station
+  end
+
 end
 
 # route = Route.new('first', 'last')
