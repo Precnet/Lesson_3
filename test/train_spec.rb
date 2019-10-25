@@ -3,7 +3,6 @@ require_relative '../train.rb'
 
 
 describe Train do
-
   context '#initialize' do
     it 'should create object with custom train number' do
       train = Train.new('cargo', 10, 'some_name')
@@ -32,7 +31,6 @@ describe Train do
       expect { train = Train.new(nil, 10) }.to raise_error(ArgumentError)
     end
   end
-
   context 'speed manipulation' do
     before(:all) do
       @train = Train.new('cargo', 10)
@@ -57,7 +55,6 @@ describe Train do
       expect(@train.current_speed).to eq(0)
     end
   end
-
   context 'carriages manipulation' do
     before(:all) do
       @train = Train.new('cargo', 10)
@@ -74,7 +71,6 @@ describe Train do
       expect { @train.remove_carriage }.to raise_error(RuntimeError)
     end
   end
-
   context 'route manipulation' do
     before(:all) do
       @train = Train.new('cargo', 10)
@@ -128,14 +124,4 @@ describe Train do
       expect { @train.get_previous_station }.to raise_error(RuntimeError)
     end
   end
-
 end
-
-#
-# route = Route.new('First', 'Last')
-# route.add_station('Second')
-# route.add_station('Third')
-#
-# train_1.set_route(route)
-# puts train_1.current_station
-# puts train_1.move_forward
