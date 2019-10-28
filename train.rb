@@ -80,24 +80,27 @@ class Train
   end
 
   private
+  # should be private because there is no need to call it in descendants
   def generate_train_number(number_length)
     # nice little magick with converting int to str with Base36
     rand(36 ** number_length).to_s(36)
   end
-
+  # should be private because descendants are created without any carriages
   def check_number_of_carriages(number_of_carriages)
     event_wrong_number_carriages = "Number of carriages should be positive Integer. Got: #{number_of_carriages}"
     raise ArgumentError, event_wrong_number_carriages unless
         number_of_carriages.is_a?(Integer) && number_of_carriages >= 0
     number_of_carriages
   end
-
+  # should be private because descendants are created without train type selection
   def check_train_type(train_type)
     event_wrong_train_type = "Wrong type of a train! Should be 'cargo' or 'passenger'. Got - '#{train_type}'"
     raise ArgumentError, event_wrong_train_type  unless TRAIN_TYPES.include? train_type
     train_type
   end
 
+  protected
+  # should be protected because there may be
   def check_route
     event_no_route = 'There are no route! You need to set route first.'
     raise event_no_route unless @route
