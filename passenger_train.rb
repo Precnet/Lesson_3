@@ -17,7 +17,7 @@ class PassengerTrain < Train
   private
 
   def carriage_correct?(carriage)
-    carriage.carriage_type == 'passenger'
+    carriage.respond_to?(:carriage_type) && carriage.carriage_type == 'passenger'
   end
 
 end
