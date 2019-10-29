@@ -11,7 +11,7 @@ class PassengerTrain < Train
   def add_carriage(carriage)
     error_message = "Wrong carriage for this type of train. Expected 'PassengerCarriage', got #{carriage.class}."
     raise ArgumentError, error_message unless carriage_correct?(carriage)
-    carriages.add(carriage)
+    carriages.push(carriage)
   end
 
   private
