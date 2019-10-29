@@ -1,17 +1,12 @@
 require 'rspec'
+require_relative '../passenger_train.rb'
 
 describe 'PassengerTrain' do
-  before do
-    # Do nothing
-  end
-
-  after do
-    # Do nothing
-  end
-
-  context 'when condition' do
-    it 'succeeds' do
-      pending 'Not implemented'
-    end
+  it 'should create train subclass of type passenger' do
+    train = PassengerTrain.new
+    expect(train.train_type).to eq('passenger')
+    expect(train.train_type).not_to eq('cargo')
+    expect(train.train_type).not_to eq('12345')
+    expect(train.class).to eq(PassengerTrain)
   end
 end
