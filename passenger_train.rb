@@ -9,9 +9,16 @@ class PassengerTrain < Train
   end
 
   def add_carriage(carriage)
+    # ToDo check for speed
     error_message = "Wrong carriage for this type of train. Expected 'PassengerCarriage', got #{carriage.class}."
     raise ArgumentError, error_message unless carriage_correct?(carriage)
     carriages.push(carriage)
+  end
+
+  def remove_carriage(carriage)
+    error_message = 'There are no carriages to remove.'
+    raise ArgumentError, error_message unless @carriages.length > 0
+    @carriages.delete_at(-1)
   end
 
   private
