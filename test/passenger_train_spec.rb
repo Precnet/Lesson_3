@@ -22,6 +22,8 @@ describe 'PassengerTrain' do
       @train.add_carriage(carriage)
       expect(@train.carriages.length).to eq(2)
       expect { @train.add_carriage('passenger') }.to raise_error(ArgumentError)
+      @train.increase_speed_by(10)
+      expect { @train.add_carriage('passenger') }.to raise_error(RuntimeError)
     end
   end
 end
