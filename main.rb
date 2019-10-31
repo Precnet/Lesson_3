@@ -1,16 +1,17 @@
 class UserInterface
 
-  def initialize(interface)
-
-  end
-
-  def select_interface_item(item_number)
-
+  def initialize
+    @stations = []
   end
 
   private
 
-  def interface_item_exists?(item)
+  def create_station(station_name)
+    station = Station.new(station_name)
+    @stations.push(station)
+  end
+
+  def show_existing_stations
 
   end
 
