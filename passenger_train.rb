@@ -9,7 +9,7 @@ class PassengerTrain < Train
   end
 
   def add_carriage(carriage)
-    # ToDo check for speed
+    raise RuntimeError, 'Can`t add new carriages while train is moving.' unless @current_speed == 0
     error_message = "Wrong carriage for this type of train. Expected 'PassengerCarriage', got #{carriage.class}."
     raise ArgumentError, error_message unless carriage_correct?(carriage)
     carriages.push(carriage)
