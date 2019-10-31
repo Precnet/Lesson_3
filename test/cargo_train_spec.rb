@@ -17,11 +17,13 @@ describe 'CargoTrain' do
     end
     it 'should add new carriages' do
       carriage = double('CargoCarriage', carriage_type: 'cargo')
+      wrong_carriage = double('PassengerCarriage', carriage_type: 'passenger')
       @train.add_carriage(carriage)
       expect(@train.carriages.length).to eq(1)
       @train.add_carriage(carriage)
       expect(@train.carriages.length).to eq(2)
       expect { @train.add_carriage('cargo') }.to raise_error(ArgumentError)
+      expect { @train.add_carriage(wrong_carriage) }.to raise_error(ArgumentError)
       @train.increase_speed_by(10)
       expect { @train.add_carriage('cargo') }.to raise_error(RuntimeError)
     end
