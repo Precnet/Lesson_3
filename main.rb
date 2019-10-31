@@ -10,7 +10,7 @@ class UserInterface
   end
 
   def select_menu_item(item)
-    raise ArgumentError, 'No such menu item!' unless @menu_items.keys.include?(item)
+    raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.keys.include?(item)
     @menu_items[item].call
   end
 
