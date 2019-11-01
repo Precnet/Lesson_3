@@ -23,7 +23,7 @@ class UserInterface
   def show_existing_stations
     if @stations.length > 0
       puts 'There are next stations:'
-      puts ', '.join(@stations)
+      puts @stations.join(', ')
     else
       puts 'There are no stations.'
     end
