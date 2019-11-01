@@ -20,8 +20,6 @@ class UserInterface
     puts "Created station: #{station_name}"
   end
 
-  private
-
   def show_existing_stations
     puts 'There are next stations:'
     puts ', '.join(@stations)
