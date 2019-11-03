@@ -37,7 +37,8 @@ class UserActions
   end
 
   def create_cargo_train
-
+    @trains.push CargoTrain.new
+    puts "New cargo train created. Its number is: #{@trains[-1].train_number}"
   end
 
   def create_passenger_train
