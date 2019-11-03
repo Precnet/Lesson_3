@@ -19,6 +19,7 @@ class UserActions
     # dont really like to store it here. In ideal world there would be a separate class for it
     @stations = []
     @trains = []
+    @routes = []
   end
 
   def create_station(station_name)
@@ -57,8 +58,12 @@ class UserActions
     end
   end
 
-  def create_route(first_station, last_station)
-
+  def create_route(first_station, last_station, route_number=nil)
+    if route_number
+      @routes.push Route.new(first_station, last_station, route_number)
+    else
+      @routes.push Route.new(first_station, last_station)
+    end
   end
 
   def add_station_to_route(route, station)
