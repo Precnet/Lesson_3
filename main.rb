@@ -17,7 +17,7 @@ class UserInterface
   def create_station(station_name)
     station = Station.new(station_name)
     @stations.push(station)
-    puts "Created station: #{station_name}"
+    puts "Created station: #{station.station_name}"
   end
 
   def show_existing_stations
