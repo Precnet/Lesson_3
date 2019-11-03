@@ -1,7 +1,6 @@
 class UserInterface
   def initialize
     @menu_items = {}
-    @stations = []
   end
 
   def create_menu_item(item, command)
@@ -15,6 +14,10 @@ class UserInterface
 end
 
 class UserActions
+  def initialize
+    @stations = []
+  end
+
   def create_station(station_name)
     station = Station.new(station_name)
     @stations.push(station)
