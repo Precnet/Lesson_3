@@ -21,11 +21,18 @@ describe 'UserInterface' do
       expect { @ui.select_menu_item('Show existing stations') }.to output("There are next stations:\none, two, three\n").to_stdout
     end
     it 'should create new trains' do
-      @ui.create_menu_item('Create new passenger train', -> { @ua.create_passenger_train })
-      @ui.create_menu_item('Create new cargo train', -> { @ua.create_cargo_train })
+      @ui.create_menu_item('Create new passenger train', -> (number=nil) { @ua.create_passenger_train number})
+      @ui.create_menu_item('Create new cargo train', -> (number=nil) { @ua.create_cargo_train number})
       @ui.create_menu_item('Show existing trains', -> { @ua.show_existing_trains })
       expect { @ui.select_menu_item('Show existing trains') }.to output("There are no trains.\n").to_stdout
-      @ui.select_menu_item('Create new passenger train')
+      message_1 = "New passenger train created. Its number is: test\n"
+      expect { @ui.select_menu_item('Create new passenger train', 'test') }.to output(message_1).to_stdout
+      message_2 = "New cargo train created. Its number is: 1234\n"
+      expect { @ui.select_menu_item('Create new cargo train', '1234') }.to output(message_2).to_stdout
+      @ui.select_menu_item('Create new cargo train', '4321')
+      @ui.select_menu_item('Show existing trains')
+      message_3 = "There are next passenger trains: test\nThere are next cargo trains: 1234,4321\n"
+      expect { @ui.select_menu_item('Show existing trains') }.to output(message_3).to_stdout
     end
   end
 end
