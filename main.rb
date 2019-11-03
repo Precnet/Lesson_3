@@ -1,6 +1,7 @@
 class UserInterface
   def initialize
     @menu_items = {}
+    @user_data = UserData.new
   end
 
   def create_menu_item(item, command)
@@ -14,9 +15,6 @@ class UserInterface
 end
 
 class UserActions
-  def initialize
-    @stations = []
-  end
 
   def create_station(station_name)
     station = Station.new(station_name)
@@ -31,5 +29,20 @@ class UserActions
     else
       puts 'There are no stations.'
     end
+  end
+
+  def create_cargo_train
+
+  end
+
+  def create_passenger_train
+
+  end
+end
+
+class UserData
+  def initialize
+    @stations = []
+    @trains = []
   end
 end
