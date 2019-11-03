@@ -13,6 +13,9 @@ describe 'UserInterface' do
       expect { ui.show_existing_stations }.to output("There are no stations.\n").to_stdout
       ui.create_station('one')
       expect { ui.show_existing_stations }.to output("There are next stations:\none\n").to_stdout
+      ui.create_station('two')
+      ui.create_station('three')
+      expect { ui.show_existing_stations }.to output("There are next stations:\none, two, three\n").to_stdout
     end
   end
 end
