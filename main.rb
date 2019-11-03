@@ -56,4 +56,16 @@ class UserActions
       puts 'There are no trains.'
     end
   end
+
+  def create_route(first_station, last_station)
+
+  end
+
+  def add_station_to_route(route, station)
+
+  end
+
+  def remove_station_from_route(route, station)
+
+  end
 end
