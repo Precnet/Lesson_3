@@ -25,6 +25,7 @@ describe 'UserInterface' do
       @ui.create_menu_item('Create new cargo train', -> { @ua.create_cargo_train })
       @ui.create_menu_item('Show existing trains', -> { @ua.show_existing_trains })
       expect { @ui.select_menu_item('Show existing trains') }.to output("There are no trains.\n").to_stdout
+      @ui.select_menu_item('Create new passenger train')
     end
   end
 end

@@ -48,8 +48,10 @@ class UserActions
 
   def show_existing_trains
     if @trains.length > 0
-      puts 'There are next trains:'
-      puts @stations.map{ |train| train.train_number }.join(', ')
+      puts 'There are next passenger trains:'
+      puts @trains.map{ |train| train.train_number if train.train_type == 'passenger'}.join(', ')
+      puts 'There are next cargo trains:'
+      puts @trains.map{ |train| train.train_number if train.train_type == 'cargo'}.join(', ')
     else
       puts 'There are no trains.'
     end
