@@ -36,13 +36,13 @@ class UserActions
     end
   end
 
-  def create_cargo_train
-    @trains.push CargoTrain.new
+  def create_cargo_train(train_number=nil)
+    train_number ? @trains.push(CargoTrain.new(train_number)) : @trains.push(CargoTrain.new)
     puts "New cargo train created. Its number is: #{@trains[-1].train_number}"
   end
 
-  def create_passenger_train
-    @trains.push PassengerTrain.new
+  def create_passenger_train(train_number=nil)
+    train_number ? @trains.push(PassengerTrain.new(train_number)) : @trains.push(PassengerTrain.new)
     puts "New passenger train created. Its number is: #{@trains[-1].train_number}"
   end
 
