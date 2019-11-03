@@ -1,8 +1,9 @@
 class Route
   attr_reader :stations
 
-  def initialize(first_station, last_station)
+  def initialize(first_station, last_station, route_number=generate_route_number(5))
     @stations = [first_station, last_station]
+    @route_number = route_number
   end
 
   def add_station(new_station)
@@ -15,5 +16,10 @@ class Route
   def delete_station(station)
     raise ArgumentError, "There is no station #{station} in current route!" unless @stations.include? station
     @stations.delete_at(@stations.find_index(station))
+  end
+
+  private
+  def generate_route_number(number_length)
+    rand(36 ** number_length).to_s(36)
   end
 end
