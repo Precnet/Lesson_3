@@ -23,8 +23,7 @@ class UserInterface
   def show_existing_stations
     if @stations.length > 0
       puts 'There are next stations:'
-      # puts @stations.each{ |station| station.station_name }.join(', ')
-      @stations.each{ |station| puts station.station_name }
+      puts @stations.map{ |station| station.station_name }.join(', ')
     else
       puts 'There are no stations.'
     end
