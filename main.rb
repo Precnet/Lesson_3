@@ -58,11 +58,14 @@ class UserActions
     end
   end
 
-  def create_route(first_station, last_station, route_number=nil)
+  def create_route(first, last, route_number=nil)
+    no_such_station_message = 'There are no station with such name.'
+    stations_exist = @stations.keys.include?(first.station_name) && @stations.keys.include?(last.station_name)
+    raise ArgumentError, no_such_station_message unless stations_exist
     if route_number
-      @routes.push Route.new(first_station, last_station, route_number)
+      @routes.push Route.new(first, last, route_number)
     else
-      @routes.push Route.new(first_station, last_station)
+      @routes.push Route.new(first, last)
     end
   end
 
