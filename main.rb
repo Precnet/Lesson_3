@@ -1,7 +1,6 @@
 class UserInterface
   def initialize
     @menu_items = {}
-    @user_data = UserData.new
   end
 
   def create_menu_item(item, command)
@@ -15,6 +14,12 @@ class UserInterface
 end
 
 class UserActions
+
+  def initialize
+    # dont really like to store it here. In ideal world there would be a separate class for it
+    @stations = []
+    @trains = []
+  end
 
   def create_station(station_name)
     station = Station.new(station_name)
@@ -37,12 +42,5 @@ class UserActions
 
   def create_passenger_train
 
-  end
-end
-
-class UserData
-  def initialize
-    @stations = []
-    @trains = []
   end
 end
