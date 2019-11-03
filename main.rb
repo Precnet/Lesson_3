@@ -45,4 +45,13 @@ class UserActions
     @trains.push PassengerTrain.new
     puts "New passenger train created. Its number is: #{@trains[-1].train_number}"
   end
+
+  def show_existing_trains
+    if @trains.length > 0
+      puts 'There are next trains:'
+      puts @stations.map{ |train| train.train_number }.join(', ')
+    else
+      puts 'There are no trains.'
+    end
+  end
 end
