@@ -16,19 +16,19 @@ describe Train do
     it 'should create Trains with positive Integer number of carriages' do
       train = Train.new('cargo', 10)
       expect(train.number_of_carriages).to eq(10)
-      expect { train = Train.new('cargo', '10') }.to raise_error(ArgumentError)
-      expect { train = Train.new('cargo', ['10']) }.to raise_error(ArgumentError)
-      expect { train = Train.new('cargo', {number: 10}) }.to raise_error(ArgumentError)
-      expect { train = Train.new('cargo', 10.1) }.to raise_error(ArgumentError)
-      expect { train = Train.new('passenger', -4) }.to raise_error(ArgumentError)
+      expect { Train.new('cargo', '10') }.to raise_error(ArgumentError)
+      expect { Train.new('cargo', ['10']) }.to raise_error(ArgumentError)
+      expect { Train.new('cargo', {number: 10}) }.to raise_error(ArgumentError)
+      expect { Train.new('cargo', 10.1) }.to raise_error(ArgumentError)
+      expect { Train.new('passenger', -4) }.to raise_error(ArgumentError)
     end
     it 'should create only Trains of cargo and passenger types' do
-      expect { train = Train.new('passenger', 10) }.not_to raise_error
-      expect { train = Train.new('cargo', 10) }.not_to raise_error
-      expect { train = Train.new('Passenger', 10) }.to raise_error(ArgumentError)
-      expect { train = Train.new(10, 10) }.to raise_error(ArgumentError)
-      expect { train = Train.new('personal', 10) }.to raise_error(ArgumentError)
-      expect { train = Train.new(nil, 10) }.to raise_error(ArgumentError)
+      expect { Train.new('passenger', 10) }.not_to raise_error
+      expect { Train.new('cargo', 10) }.not_to raise_error
+      expect { Train.new('Passenger', 10) }.to raise_error(ArgumentError)
+      expect { Train.new(10, 10) }.to raise_error(ArgumentError)
+      expect { Train.new('personal', 10) }.to raise_error(ArgumentError)
+      expect { Train.new(nil, 10) }.to raise_error(ArgumentError)
     end
   end
   context 'speed manipulation' do
