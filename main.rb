@@ -1,5 +1,4 @@
 class UserInterface
-
   def initialize
     @menu_items = {}
     @stations = []
@@ -13,7 +12,9 @@ class UserInterface
     raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.keys.include?(item)
     @menu_items[item].call
   end
+end
 
+class UserActions
   def create_station(station_name)
     station = Station.new(station_name)
     @stations.push(station)
@@ -28,5 +29,4 @@ class UserInterface
       puts 'There are no stations.'
     end
   end
-
 end
