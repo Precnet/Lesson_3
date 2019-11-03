@@ -17,21 +17,21 @@ class UserActions
 
   def initialize
     # dont really like to store it here. In ideal world there would be a separate class for it
-    @stations = []
+    @stations = {}
     @trains = []
     @routes = []
   end
 
   def create_station(station_name)
     station = Station.new(station_name)
-    @stations.push(station)
+    @stations[station.station_name] = station
     puts "Created station: #{station.station_name}"
   end
 
   def show_existing_stations
     if @stations.length > 0
       puts 'There are next stations:'
-      puts @stations.map{ |station| station.station_name }.join(', ')
+      puts @stations.keys{ |station_name| station_name }.join(', ')
     else
       puts 'There are no stations.'
     end
