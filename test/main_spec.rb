@@ -63,8 +63,8 @@ describe 'UserInterface' do
       @ui.select_menu_item('Create new station', 'new_1')
       route_name = @ud.routes.keys.first
       station_name = @ud.stations.keys.last
-      expect { @ui.select_menu_item('Add station to route', [route_name, 'new_1']).to raise(ArgumentError) }
-      expect { @ui.select_menu_item('Add station to route', ['some_route', station_name]).to raise(ArgumentError) }
+      expect { @ui.select_menu_item('Add station to route', [route_name, 'new_1']).to raise_error(ArgumentError) }
+      expect { @ui.select_menu_item('Add station to route', ['some_route', station_name]).to raise_error(ArgumentError) }
       message = "Station #{station_name} were added to route #{route_name}\n"
       expect { @ui.select_menu_item('Add station to route', [route_name, station_name]) }.to output(message).to_stdout
       expect(@ud.routes[route_name].stations.length).to eq(3)
