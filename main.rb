@@ -79,7 +79,7 @@ class UserActions
 end
 
 class UserData
-  attr_accessor :stations, :trains
+  attr_accessor :stations, :trains, :routes
   def initialize
     @stations = {}
     @trains = {}
