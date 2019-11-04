@@ -49,6 +49,7 @@ describe 'UserInterface' do
       @ui.create_menu_item('Create new station', -> (station) { @ua.create_station station})
       @ui.create_menu_item('Create new route', -> (first, last, number=nil) {@ua.create_route(first, last, number)})
       @ui.create_menu_item('Add station to route', -> (route, station) {@ua.add_station_to_route(route, station)})
+      @ui.create_menu_item('Remove station from route', -> (route, station) {@ua.remove_station_from_route(route, station)})
     end
     it 'should create new routes' do
       @ui.select_menu_item('Create new station', 'first')
@@ -69,6 +70,22 @@ describe 'UserInterface' do
       expect { @ui.select_menu_item('Add station to route', [route_name, station_name]) }.to output(message).to_stdout
       expect(@ud.routes[route_name].stations.length).to eq(3)
       expect(@ud.routes[route_name].stations[-2].station_name).to eq('new_1')
+    end
+    it 'should delete stations from route' do
+      @ui.select_menu_item('Create new station', 'middle_1')
+      @ui.select_menu_item('Create new station', 'middle_2')
+      route_name = @ud.routes.keys.first
+      @ui.select_menu_item('Add station to route', [route_name, 'middle_1'])
+      @ui.select_menu_item('Add station to route', [route_name, 'middle_2'])
+      expect(@ud.routes[route_name].stations.length).to eq(5)
+      expect { @ui.select_menu_item('Remove station from route', [route_name, 'new_2']) }.to raise_error(ArgumentError)
+      expect { @ui.select_menu_item('Remove station from route', ['route_name', 'new_1']) }.to raise_error(ArgumentError)
+      message = "Station 'new_1' were removed from route '#{route_name}'\n"
+      expect { @ui.select_menu_item('Remove station from route', [route_name, 'new_1']) }.to output(message).to_stdout
+      expect(@ud.routes[route_name].stations.length).to eq(4)
+      @ui.select_menu_item('Remove station from route', [route_name, 'middle_1'])
+      @ui.select_menu_item('Remove station from route', [route_name, 'middle_2'])
+      expect(@ud.routes[route_name].stations.length).to eq(2)
     end
   end
 end

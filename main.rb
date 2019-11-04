@@ -79,7 +79,7 @@ class UserActions
   def remove_station_from_route(route_name, station_name)
     check_route_station_existence(route_name, station_name)
     @user_data.routes[route_name].delete_station(@user_data.stations[station_name])
-    puts "Station #{station_name} were removed from route #{route_name}"
+    puts "Station '#{station_name}' were removed from route '#{route_name}'"
   end
 
   private
