@@ -70,11 +70,11 @@ class UserActions
     puts "Route '#{route.route_number}' created"
   end
 
-  def add_station_to_route(route, station)
+  def add_station_to_route(route_name, station_name)
 
   end
 
-  def remove_station_from_route(route, station)
+  def remove_station_from_route(route_name, station_name)
 
   end
 end
