@@ -71,21 +71,37 @@ class UserActions
   end
 
   def add_station_to_route(route_name, station_name)
-    check_route_station_existence(route_name, station_name)
+    check_route_existence(route_name)
+    check_station_existence(station_name)
     @user_data.routes[route_name].add_station(@user_data.stations[station_name])
     puts "Station #{station_name} were added to route #{route_name}"
   end
 
   def remove_station_from_route(route_name, station_name)
-    check_route_station_existence(route_name, station_name)
+    check_route_existence(route_name)
+    check_station_existence(station_name)
     @user_data.routes[route_name].delete_station(@user_data.stations[station_name])
     puts "Station '#{station_name}' were removed from route '#{route_name}'"
   end
 
+  def add_route_to_train(route_name, train_name)
+    check_route_existence(route_name)
+    check_train_existence(train_name)
+    @user_data.trains[train_name].set_route(@ud.routes[route_name])
+    puts "Train '#{train_name}' is following route '#{route_name} now'"
+  end
+
   private
-  def check_route_station_existence(route_name, station_name)
+  def check_route_existence(route_name)
     raise ArgumentError, "No such route #{route_name}" unless @user_data.routes.keys.include? route_name
+  end
+
+  def check_station_existence(station_name)
     raise ArgumentError, "No such station #{station_name}" unless @user_data.stations.keys.include? station_name
+  end
+
+  def check_train_existence(train_name)
+    raise ArgumentError, "No such train #{train_name}" unless @user_data.trains.keys.include? train_name
   end
 end
 
