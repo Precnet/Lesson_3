@@ -7,51 +7,50 @@ class UserInterface
     @menu_items[item] = command
   end
 
-  def select_menu_item(item, argument=nil)
+  def select_menu_item(item, args=nil)
     raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.keys.include?(item)
-    argument ? @menu_items[item].call(argument) : @menu_items[item].call
+    args ? @menu_items[item].call(*args) : @menu_items[item].call
   end
 end
 
 class UserActions
 
-  def initialize
-    # dont really like to store it here. In ideal world there would be a separate class for it
-    @stations = {}
-    @trains = []
-    @routes = []
+  def initialize(user_data)
+    @user_data = user_data
   end
 
   def create_station(station_name)
     station = Station.new(station_name)
-    @stations[station.station_name] = station
+    @user_data.stations[station.station_name] = station
     puts "Created station: #{station.station_name}"
   end
 
   def show_existing_stations
-    if @stations.length > 0
+    if @user_data.stations.length > 0
       puts 'There are next stations:'
-      puts @stations.keys{ |station_name| station_name }.join(', ')
+      puts @user_data.stations.keys{ |station_name| station_name }.join(', ')
     else
       puts 'There are no stations.'
     end
   end
 
   def create_cargo_train(train_number=nil)
-    train_number ? @trains.push(CargoTrain.new(train_number)) : @trains.push(CargoTrain.new)
-    puts "New cargo train created. Its number is: #{@trains[-1].train_number}"
+    train = train_number ? CargoTrain.new(train_number) : CargoTrain.new
+    @user_data.trains[train.train_number] = train
+    puts "New cargo train created. Its number is: #{train.train_number}"
   end
 
   def create_passenger_train(train_number=nil)
-    train_number ? @trains.push(PassengerTrain.new(train_number)) : @trains.push(PassengerTrain.new)
-    puts "New passenger train created. Its number is: #{@trains[-1].train_number}"
+    train = train_number ? PassengerTrain.new(train_number) : PassengerTrain.new
+    @user_data.trains[train.train_number] = train
+    puts "New passenger train created. Its number is: #{train.train_number}"
   end
 
   def show_existing_trains
-    if @trains.length > 0
-      passenger_trains = @trains.map{ |train| train.train_number if train.train_type == 'passenger'}
+    if @user_data.trains.length > 0
+      passenger_trains = @user_data.trains.select { |number, train| train.train_type == 'passenger'}.keys
       puts 'There are next passenger trains: ' + passenger_trains.compact.join(',')
-      cargo_trains = @trains.map{ |train| train.train_number if train.train_type == 'cargo'}
+      cargo_trains = @user_data.trains.select { |train_number, train| train.train_type == 'cargo'}.keys
       puts 'There are next cargo trains: ' + cargo_trains.compact.join(',')
     else
       puts 'There are no trains.'
@@ -60,13 +59,14 @@ class UserActions
 
   def create_route(first, last, route_number=nil)
     no_such_station_message = 'There are no station with such name.'
-    stations_exist = @stations.keys.include?(first.station_name) && @stations.keys.include?(last.station_name)
+    stations_exist = @user_data.stations.keys.include?(first.station_name) && @user_data.stations.keys.include?(last.station_name)
     raise ArgumentError, no_such_station_message unless stations_exist
     if route_number
-      @routes.push Route.new(first, last, route_number)
+      route = Route.new(first, last, route_number)
     else
-      @routes.push Route.new(first, last)
+      route = Route.new(first, last)
     end
+    @user_data.routes[route.route_number] = route
   end
 
   def add_station_to_route(route, station)
@@ -75,5 +75,14 @@ class UserActions
 
   def remove_station_from_route(route, station)
 
+  end
+end
+
+class UserData
+  attr_accessor :stations, :trains
+  def initialize
+    @stations = {}
+    @trains = {}
+    @routes = {}
   end
 end
