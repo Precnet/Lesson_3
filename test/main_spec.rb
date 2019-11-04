@@ -39,15 +39,36 @@ describe 'UserInterface' do
       message_3 = "There are next passenger trains: test\nThere are next cargo trains: 1234,4321\n"
       expect { @ui.select_menu_item('Show existing trains') }.to output(message_3).to_stdout
     end
+  end
+  context 'route management' do
+    before(:all) do
+      @ui = UserInterface.new
+      @ud = UserData.new
+      @ua = UserActions.new(@ud)
+      @ui.create_menu_item('Show existing stations', lambda { @ua.show_existing_stations })
+      @ui.create_menu_item('Create new station', -> (station) { @ua.create_station station})
+      @ui.create_menu_item('Create new route', -> (first, last, number=nil) {@ua.create_route(first, last, number)})
+      @ui.create_menu_item('Add station to route', -> (route, station) {@ua.add_station_to_route(route, station)})
+    end
     it 'should create new routes' do
       @ui.select_menu_item('Create new station', 'first')
       @ui.select_menu_item('Create new station', 'last')
-      @ui.create_menu_item('Create new route', -> (first, last, number=nil) {@ua.create_route(first, last, number)})
       message = "Route 'test' created\n"
       expect { @ui.select_menu_item('Create new route', [@ud.stations['first'], @ud.stations['last'], 'test']) }.to output(message).to_stdout
       expect(@ud.routes.length).to eq(1)
       @ui.select_menu_item('Create new route', [@ud.stations['last'], @ud.stations['first']])
       expect(@ud.routes.length).to eq(2)
+    end
+    it 'should add stations to routes' do
+      @ui.select_menu_item('Create new station', 'new_1')
+      route_name = @ud.routes.keys.first
+      station_name = @ud.stations.keys.last
+      expect { @ui.select_menu_item('Add station to route', [route_name, 'new_1']).to raise(ArgumentError) }
+      expect { @ui.select_menu_item('Add station to route', ['some_route', station_name]).to raise(ArgumentError) }
+      message = "Station #{station_name} were added to route #{route_name}\n"
+      expect { @ui.select_menu_item('Add station to route', [route_name, station_name]) }.to output(message).to_stdout
+      expect(@ud.routes[route_name].stations.length).to eq(3)
+      expect(@ud.routes[route_name].stations[-2].station_name).to eq('new_1')
     end
   end
 end
