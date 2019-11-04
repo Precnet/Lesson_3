@@ -67,6 +67,7 @@ class UserActions
       route = Route.new(first, last)
     end
     @user_data.routes[route.route_number] = route
+    puts "Route '#{route.route_number}' created"
   end
 
   def add_station_to_route(route, station)
