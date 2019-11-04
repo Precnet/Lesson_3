@@ -45,6 +45,9 @@ describe 'UserInterface' do
       @ui.create_menu_item('Create new route', -> (first, last, number=nil) {@ua.create_route(first, last, number)})
       message = "Route 'test' created\n"
       expect { @ui.select_menu_item('Create new route', [@ud.stations['first'], @ud.stations['last'], 'test']) }.to output(message).to_stdout
+      expect(@ud.routes.length).to eq(1)
+      @ui.select_menu_item('Create new route', [@ud.stations['last'], @ud.stations['first']])
+      expect(@ud.routes.length).to eq(2)
     end
   end
 end
