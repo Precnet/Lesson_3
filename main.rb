@@ -74,6 +74,7 @@ class UserActions
     raise ArgumentError, "No such route #{route_name}" unless @user_data.routes.keys.include? route_name
     raise ArgumentError, "No such station #{station_name}" unless @user_data.stations.keys.include? station_name
     @user_data.routes[route_name].add_station(@user_data.stations[station_name])
+    puts "Station #{station_name} were added to route #{route_name}"
   end
 
   def remove_station_from_route(route_name, station_name)
