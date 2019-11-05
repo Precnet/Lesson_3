@@ -109,13 +109,15 @@ class UserActions
   def move_train_forward(train_number)
     check_train_existence(train_number)
     @user_data.trains[train_number].move_forward
-    puts "Train had arrived at next station! Current station is #{@user_data.trains[train_number].current_station}"
+    message = 'Train had arrived at next station! Current station is '
+    puts message + "#{@user_data.trains[train_number].current_station.station_name}"
   end
 
   def move_train_backward(train_number)
     check_train_existence(train_number)
     @user_data.trains[train_number].move_backward
-    puts "Train had arrived at previous station! Current station is #{@user_data.trains[train_number].current_station}"
+    message = 'Train had arrived at previous station! Current station is '
+    puts message + "#{@user_data.trains[train_number].current_station.station_name}"
   end
 
   private
