@@ -6,12 +6,13 @@ describe 'UserInterface' do
     @ui = UserInterface.new
     @ud = UserData.new
     @ua = UserActions.new(@ud)
-    @ui.create_menu_item('Show existing stations', lambda { @ua.show_existing_stations })
+    @ui.create_menu_item('Show existing stations', -> { @ua.show_existing_stations })
     @ui.create_menu_item('Create new station', -> (station) { @ua.create_station station})
     @ui.create_menu_item('Create new route', -> (first, last, number=nil) {@ua.create_route(first, last, number)})
     @ui.create_menu_item('Add station to route', -> (route, station) {@ua.add_station_to_route(route, station)})
     @ui.create_menu_item('Remove station from route', -> (route, station) {@ua.remove_station_from_route(route, station)})
     @ui.create_menu_item('Add carriage to train', -> (train_number) { @ua.add_carriage_to_train(train_number) })
+    @ui.create_menu_item('Remove carriage from train', -> (train_number, carriage_number) { @ua.remove_carriage_from_train(train_number, carriage_number) })
   end
   context 'creating and selecting new menu items' do
     it 'should show all created stations' do
@@ -101,6 +102,14 @@ describe 'UserInterface' do
       expect { @ui.select_menu_item('Add carriage to train', 'test')}.to output(message_passenger).to_stdout
       message_cargo = "Cargo carriage was added to train '1234'\n"
       expect { @ui.select_menu_item('Add carriage to train', '1234')}.to output(message_cargo).to_stdout
+    end
+    it 'should remove carriage from train' do
+      expect { @ui.select_menu_item('Remove carriage from train', ['test', 'smth']) }.to raise_error(ArgumentError)
+      carriage_number = @ud.trains['test'].carriages[0].carriage_number
+      message = "Carriage '#{carriage_number}' was removed from train 'test'\n"
+      expect(@ud.trains['test'].number_of_carriages).to eq(2)
+      expect { @ui.select_menu_item('Remove carriage from train', ['test', carriage_number]) }.to output(message).to_stdout
+      expect(@ud.trains['test'].number_of_carriages).to eq(1)
     end
   end
 end
