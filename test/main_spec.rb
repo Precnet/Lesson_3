@@ -15,6 +15,7 @@ describe 'UserInterface' do
     @ui.create_menu_item('Remove carriage from train', -> (train_number, carriage_number) { @ua.remove_carriage_from_train(train_number, carriage_number) })
     @ui.create_menu_item('Move train forward', -> (train_number) { @ua.move_train_forward(train_number) })
     @ui.create_menu_item('Move train backward', -> (train_number) { @ua.move_train_backward(train_number) })
+    @ui.create_menu_item('Show trains at station', -> (station_name) { @ua.show_trains_at_station(station_name) })
   end
   context 'creating and selecting new menu items' do
     it 'should show all created stations' do
@@ -122,6 +123,17 @@ describe 'UserInterface' do
       @ui.select_menu_item('Add station to route', [route_name, 'middle_1'])
       message_backward = "Train had arrived at previous station! Current station is middle_1\n"
       expect { @ui.select_menu_item('Move train backward', 'test') }.to output(message_backward).to_stdout
+    end
+  end
+  context 'displaying trains at station' do
+    it 'should correctly display trains at station' do
+      message_1 = "There are next trains at station 'middle_1':\nPassenger trains: [\"test\"]\nCargo trains: []\n"
+      expect { @ui.select_menu_item('Show trains at station', 'middle_1') }.to output(message_1).to_stdout
+      @ui.select_menu_item('Move train forward', 'test')
+      message_2 = "There are next trains at station 'middle_1':\nPassenger trains: []\nCargo trains: []\n"
+      expect { @ui.select_menu_item('Show trains at station', 'middle_1') }.to output(message_2).to_stdout
+      @ui.select_menu_item('Move train backward', 'test')
+      expect { @ui.select_menu_item('Show trains at station', 'middle_1') }.to output(message_1).to_stdout
     end
   end
 end
