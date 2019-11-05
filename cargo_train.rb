@@ -20,10 +20,10 @@ class CargoTrain < Train
     carriages.push(carriage)
   end
 
-  def remove_carriage(carriage)
-    error_message = 'There are no carriages to remove.'
-    raise ArgumentError, error_message unless @carriages.length > 0
-    @carriages.delete_at(-1)
+  def remove_carriage(carriage_number)
+    error_message = 'There are no such carriages.'
+    raise ArgumentError, error_message unless @carriages.map { |carriage| carriage.carriage_number }.include?(carriage_number)
+    @carriages.reject! { |carriage| carriage.carriage_number == carriage_number }
   end
 
   def number_of_carriages
