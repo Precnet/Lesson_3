@@ -11,10 +11,17 @@ class UserInterface
     raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.keys.include?(item)
     args ? @menu_items[item].call(*args) : @menu_items[item].call
   end
+
+  def show_menu
+    
+  end
+
+  def get_user_input
+
+  end
 end
 
 class UserActions
-
   def initialize(user_data)
     @user_data = user_data
   end
