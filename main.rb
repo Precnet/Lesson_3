@@ -84,11 +84,19 @@ class UserActions
     puts "Station '#{station_name}' were removed from route '#{route_name}'"
   end
 
-  def add_route_to_train(route_name, train_name)
+  def add_route_to_train(route_name, train_number)
     check_route_existence(route_name)
-    check_train_existence(train_name)
-    @user_data.trains[train_name].set_route(@user_data.routes[route_name])
-    puts "Train '#{train_name}' is following route '#{route_name} now'"
+    check_train_existence(train_number)
+    @user_data.trains[train_number].set_route(@user_data.routes[route_name])
+    puts "Train '#{train_number}' is following route '#{route_name} now'"
+  end
+
+  def add_carriage_to_train(train_number)
+    check_train_existence(train_number)
+    carriage_type = @user_data.trains[train_number].train_type
+    carriage = carriage_type == 'cargo' ? CargoCarriage.new : PassengerCarriage.new
+    @user_data.trains[train_number].add_carriage(carriage)
+    puts "#{carriage_type.capitalize} carriage was added to train '#{train_number}'"
   end
 
   private
