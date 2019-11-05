@@ -99,6 +99,13 @@ class UserActions
     puts "#{carriage_type.capitalize} carriage was added to train '#{train_number}'"
   end
 
+  def remove_carriage_from_train(train_number, carriage_number)
+    check_train_existence(train_number)
+    check_train_has_such_carriage(train_number, carriage_number)
+    @user_data.trains[train_number].remove_carriage(carriage_number)
+    puts "Carriage '#{}' was removed from train '#{train_number}'"
+  end
+
   private
   def check_route_existence(route_name)
     raise ArgumentError, "No such route #{route_name}" unless @user_data.routes.keys.include? route_name
@@ -110,6 +117,12 @@ class UserActions
 
   def check_train_existence(train_name)
     raise ArgumentError, "No such train #{train_name}" unless @user_data.trains.keys.include? train_name
+  end
+
+  def check_train_has_such_carriage(train_number, carriage_number)
+    error_message = "Train '#{train_number}' has no carriages with number '#{carriage_number}'"
+    has_carriage = @user_data.trains[train_number].carriages.map{|carriage| carriage.carriage_number}.include?(carriage_number)
+    raise ArgumentError, error_message unless has_carriage
   end
 end
 
