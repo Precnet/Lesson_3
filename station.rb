@@ -38,10 +38,10 @@ class Station
   end
 
   def train_at_station?(train_number)
-    @trains_at_station.map { |train| train.train_number}.include? train_number
+    @trains_at_station.map { |train| train.train_number }.include? train_number
   end
 
   def get_train_index_by(train_name)
-    @trains_at_station.map { |train| train.train_number}.find_index(train_name)
+    @trains_at_station.map { |train| train.train_number }.find_index(train_name)
   end
 end
