@@ -87,5 +87,15 @@ describe 'UserInterface' do
       @ui.select_menu_item('Remove station from route', [route_name, 'middle_2'])
       expect(@ud.routes[route_name].stations.length).to eq(2)
     end
+    it 'should add route to train' do
+      @ui.create_menu_item('Create new passenger train', -> (number=nil) { @ua.create_passenger_train number})
+      @ui.select_menu_item('Create new passenger train', 'passenger_train')
+      @ui.create_menu_item('Add route to train', -> (route, train) { @ua.add_route_to_train(route, train) })
+      route_name = @ud.routes.keys.first
+      train_name = @ud.trains.keys.first
+      expect { @ui.select_menu_item('Add route to train', [route_name, 'some_train']) }.to raise_error(ArgumentError)
+      message = "Train '#{train_name}' is following route '#{route_name} now'\n"
+      expect { @ui.select_menu_item('Add route to train', [route_name, train_name]) }.to output(message).to_stdout
+    end
   end
 end
