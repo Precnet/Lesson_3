@@ -13,11 +13,26 @@ class UserInterface
   end
 
   def show_menu
-    
+    puts "Type index number to select menu item\n"
   end
 
   def get_user_input
 
+  end
+
+  def create_default_menu
+    user_data = UserData.new
+    user_action = UserActions.new(user_data)
+    create_menu_item('Show existing stations', -> { user_action.show_existing_stations })
+    create_menu_item('Create new station', -> (station) { user_action.create_station station})
+    create_menu_item('Create new route', -> (first, last, number=nil) {user_action.create_route(first, last, number)})
+    create_menu_item('Add station to route', -> (route, station) {user_action.add_station_to_route(route, station)})
+    create_menu_item('Remove station from route', -> (route, station) {user_action.remove_station_from_route(route, station)})
+    create_menu_item('Add carriage to train', -> (train_number) { user_action.add_carriage_to_train(train_number) })
+    create_menu_item('Remove carriage from train', -> (train_number, carriage_number) { user_action.remove_carriage_from_train(train_number, carriage_number) })
+    create_menu_item('Move train forward', -> (train_number) { user_action.move_train_forward(train_number) })
+    create_menu_item('Move train backward', -> (train_number) { user_action.move_train_backward(train_number) })
+    create_menu_item('Show trains at station', -> (station_name) { user_action.show_trains_at_station(station_name) })
   end
 end
 
