@@ -134,6 +134,13 @@ class UserActions
     puts message + "#{@user_data.trains[train_number].current_station.station_name}"
   end
 
+  def show_trains_at_station(station_name)
+    check_station_existence(station_name)
+    puts "There are next trains at station '#{station_name}':"
+    puts "Passenger trains: #{@user_data.stations[station_name].trains_at_station_of_type('passenger')}"
+    puts "Cargo trains: #{@user_data.stations[station_name].trains_at_station_of_type('cargo')}"
+  end
+
   private
   def check_route_existence(route_name)
     raise ArgumentError, "No such route #{route_name}" unless @user_data.routes.keys.include? route_name
