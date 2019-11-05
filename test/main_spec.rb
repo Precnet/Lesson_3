@@ -11,6 +11,7 @@ describe 'UserInterface' do
     @ui.create_menu_item('Create new route', -> (first, last, number=nil) {@ua.create_route(first, last, number)})
     @ui.create_menu_item('Add station to route', -> (route, station) {@ua.add_station_to_route(route, station)})
     @ui.create_menu_item('Remove station from route', -> (route, station) {@ua.remove_station_from_route(route, station)})
+    @ui.create_menu_item('Add carriage to train', -> (train_number) { @ua.add_carriage_to_train(train_number) })
   end
   context 'creating and selecting new menu items' do
     it 'should show all created stations' do
@@ -93,7 +94,13 @@ describe 'UserInterface' do
   end
   context 'carriage management' do
     it 'should add carriage to train' do
-
+      message_passenger = "Passenger carriage was added to train 'test'\n"
+      expect(@ud.trains['test'].number_of_carriages).to eq(0)
+      expect { @ui.select_menu_item('Add carriage to train', 'test')}.to output(message_passenger).to_stdout
+      expect(@ud.trains['test'].number_of_carriages).to eq(1)
+      expect { @ui.select_menu_item('Add carriage to train', 'test')}.to output(message_passenger).to_stdout
+      message_cargo = "Cargo carriage was added to train '1234'\n"
+      expect { @ui.select_menu_item('Add carriage to train', '1234')}.to output(message_cargo).to_stdout
     end
   end
 end
