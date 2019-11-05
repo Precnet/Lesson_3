@@ -13,6 +13,8 @@ describe 'UserInterface' do
     @ui.create_menu_item('Remove station from route', -> (route, station) {@ua.remove_station_from_route(route, station)})
     @ui.create_menu_item('Add carriage to train', -> (train_number) { @ua.add_carriage_to_train(train_number) })
     @ui.create_menu_item('Remove carriage from train', -> (train_number, carriage_number) { @ua.remove_carriage_from_train(train_number, carriage_number) })
+    @ui.create_menu_item('Move train forward', -> (train_number) { @ua.move_train_forward(train_number) })
+    @ui.create_menu_item('Move train backward', -> (train_number) { @ua.move_train_backward(train_number) })
   end
   context 'creating and selecting new menu items' do
     it 'should show all created stations' do
@@ -110,6 +112,16 @@ describe 'UserInterface' do
       expect(@ud.trains['test'].number_of_carriages).to eq(2)
       expect { @ui.select_menu_item('Remove carriage from train', ['test', carriage_number]) }.to output(message).to_stdout
       expect(@ud.trains['test'].number_of_carriages).to eq(1)
+    end
+  end
+  context 'train movement' do
+    it 'should move train forward and backward' do
+      message_forward = "Train had arrived at next station! Current station is last\n"
+      expect { @ui.select_menu_item('Move train forward', 'test') }.to output(message_forward).to_stdout
+      route_name = @ud.trains['test'].route.route_number
+      @ui.select_menu_item('Add station to route', [route_name, 'middle_1'])
+      message_backward = "Train had arrived at previous station! Current station is middle_1\n"
+      expect { @ui.select_menu_item('Move train backward', 'test') }.to output(message_backward).to_stdout
     end
   end
 end
