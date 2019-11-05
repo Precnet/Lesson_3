@@ -87,7 +87,11 @@ class UserActions
   def add_route_to_train(route_name, train_number)
     check_route_existence(route_name)
     check_train_existence(train_number)
+    # register route and set current station as first station
     @user_data.trains[train_number].set_route(@user_data.routes[route_name])
+    # register train at station
+    station_name = @ud.routes[route_name].stations[0].station_name
+    @ud.stations[station_name].train_arrived(@user_data.trains[train_number])
     puts "Train '#{train_number}' is following route '#{route_name} now'"
   end
 
