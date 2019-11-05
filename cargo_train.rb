@@ -26,6 +26,10 @@ class CargoTrain < Train
     @carriages.delete_at(-1)
   end
 
+  def number_of_carriages
+    @carriages.length
+  end
+
   private
 
   def carriage_correct?(carriage)
