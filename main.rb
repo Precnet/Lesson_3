@@ -103,7 +103,7 @@ class UserActions
     check_train_existence(train_number)
     check_train_has_such_carriage(train_number, carriage_number)
     @user_data.trains[train_number].remove_carriage(carriage_number)
-    puts "Carriage '#{}' was removed from train '#{train_number}'"
+    puts "Carriage '#{carriage_number}' was removed from train '#{train_number}'"
   end
 
   private
