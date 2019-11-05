@@ -106,6 +106,16 @@ class UserActions
     puts "Carriage '#{carriage_number}' was removed from train '#{train_number}'"
   end
 
+  def move_train_forward(train_number)
+    check_train_existence(train_number)
+    @user_data.trains[train_number].move_forward
+  end
+
+  def move_train_backward(train_number)
+    check_train_existence(train_number)
+    @user_data.trains[train_number].move_backward
+  end
+
   private
   def check_route_existence(route_name)
     raise ArgumentError, "No such route #{route_name}" unless @user_data.routes.keys.include? route_name
