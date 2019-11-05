@@ -56,7 +56,6 @@ class Train
     event_no_next_station = 'Train is already at it`s final station and can`t move further!'
     raise event_no_next_station unless next_station_available?
     @current_station = @route.stations[next_station_index]
-    "Train had arrived at next station! Current station is #{@current_station}"
   end
 
   def move_backward
@@ -64,7 +63,6 @@ class Train
     event_no_previous_station = 'Train is already at it`s first station and can`t move backward!'
     raise event_no_previous_station unless previous_station_available?
     @current_station = @route.stations[previous_station_index]
-    "Train had arrived at previous station! Current station is #{@current_station}"
   end
 
   def get_previous_station
