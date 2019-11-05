@@ -87,7 +87,7 @@ class UserActions
   def add_route_to_train(route_name, train_name)
     check_route_existence(route_name)
     check_train_existence(train_name)
-    @user_data.trains[train_name].set_route(@ud.routes[route_name])
+    @user_data.trains[train_name].set_route(@user_data.routes[route_name])
     puts "Train '#{train_name}' is following route '#{route_name} now'"
   end
 
