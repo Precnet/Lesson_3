@@ -90,8 +90,8 @@ class UserActions
     # register route and set current station as first station
     @user_data.trains[train_number].set_route(@user_data.routes[route_name])
     # register train at station
-    station_name = @ud.routes[route_name].stations[0].station_name
-    @ud.stations[station_name].train_arrived(@user_data.trains[train_number])
+    station_name = @user_data.trains[train_number].current_station.station_name
+    @user_data.stations[station_name].train_arrived(@user_data.trains[train_number])
     puts "Train '#{train_number}' is following route '#{route_name} now'"
   end
 
