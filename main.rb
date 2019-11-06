@@ -131,14 +131,14 @@ class UserActions
   def add_station_to_route(route_name, station_name)
     check_route_existence(route_name)
     check_station_existence(station_name)
-    @user_data.routes[route_name].add_station(@user_data.stations[station_name])
+    @user_data.routes[route_name].add_station(station_name)
     puts "Station #{station_name} were added to route #{route_name}"
   end
 
   def remove_station_from_route(route_name, station_name)
     check_route_existence(route_name)
     check_station_existence(station_name)
-    @user_data.routes[route_name].delete_station(@user_data.stations[station_name])
+    @user_data.routes[route_name].delete_station(station_name)
     puts "Station '#{station_name}' were removed from route '#{route_name}'"
   end
 

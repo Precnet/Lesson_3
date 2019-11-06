@@ -53,9 +53,9 @@ describe 'UserInterface' do
       @ui.select_menu_item('Create new station', 'first')
       @ui.select_menu_item('Create new station', 'last')
       message = "Route 'test' created\n"
-      expect { @ui.select_menu_item('Create new route', [@ud.stations['first'], @ud.stations['last'], 'test']) }.to output(message).to_stdout
+      expect { @ui.select_menu_item('Create new route', ['first', 'last', 'test']) }.to output(message).to_stdout
       expect(@ud.routes.length).to eq(1)
-      @ui.select_menu_item('Create new route', [@ud.stations['last'], @ud.stations['first']])
+      @ui.select_menu_item('Create new route', ['last', 'first'])
       expect(@ud.routes.length).to eq(2)
     end
     it 'should add stations to routes' do
@@ -122,6 +122,7 @@ describe 'UserInterface' do
       route_name = @ud.trains['test'].route.route_number
       @ui.select_menu_item('Add station to route', [route_name, 'middle_1'])
       message_backward = "Train had arrived at previous station! Current station is middle_1\n"
+      puts @ud.trains
       expect { @ui.select_menu_item('Move train backward', 'test') }.to output(message_backward).to_stdout
     end
   end
