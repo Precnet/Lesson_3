@@ -112,9 +112,10 @@ class UserActions
     puts "New passenger train created. Its number is: #{train.train_number}"
   end
 
-  def show_existing_trains
+  def show_existing_trains2
     if @user_data.trains.length > 0
-      passenger_trains = @user_data.trains.select { |_, train| train.train_type == 'passenger'}.keys
+      passenger_trains = @user_data.trains.select { |_, train| train.train_type == 'passenger'}
+      passenger_trains = passenger_trains.map { |name, train| name + '(' + train.carriages.join(',') + ')'}
       puts 'There are next passenger trains: ' + passenger_trains.compact.join(',')
       cargo_trains = @user_data.trains.select { |_, train| train.train_type == 'cargo'}.keys
       puts 'There are next cargo trains: ' + cargo_trains.compact.join(',')
