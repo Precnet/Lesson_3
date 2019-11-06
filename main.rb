@@ -193,7 +193,7 @@ class UserActions
     new_station = @user_data.trains[train_number].current_station
     @user_data.stations[new_station].train_arrived(@user_data.trains[train_number])
     message = 'Train had arrived at previous station! Current station is '
-    puts message + "#{@user_data.trains[train_number].current_station.station_name}"
+    puts message + "#{@user_data.trains[train_number].current_station}"
   end
 
   def show_trains_at_station(station_name)

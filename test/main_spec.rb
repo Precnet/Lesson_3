@@ -67,7 +67,7 @@ describe 'UserInterface' do
       message = "Station #{station_name} were added to route #{route_name}\n"
       expect { @ui.select_menu_item('Add station to route', [route_name, station_name]) }.to output(message).to_stdout
       expect(@ud.routes[route_name].stations.length).to eq(3)
-      expect(@ud.routes[route_name].stations[-2].station_name).to eq('new_1')
+      expect(@ud.routes[route_name].stations[-2]).to eq('new_1')
     end
     it 'should delete stations from route' do
       @ui.select_menu_item('Create new station', 'middle_1')
