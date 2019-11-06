@@ -11,6 +11,9 @@ describe 'UserInterface' do
     @ui.create_menu_item('Create new route', -> (first, last, number=nil) {@ua.create_route(first, last, number)})
     @ui.create_menu_item('Add station to route', -> (route, station) {@ua.add_station_to_route(route, station)})
     @ui.create_menu_item('Remove station from route', -> (route, station) {@ua.remove_station_from_route(route, station)})
+    @ui.create_menu_item('Create new passenger train', -> (number=nil) { @ua.create_passenger_train number})
+    @ui.create_menu_item('Create new cargo train', -> (number=nil) { @ua.create_cargo_train number})
+    @ui.create_menu_item('Show existing trains', -> { @ua.show_existing_trains })
     @ui.create_menu_item('Add carriage to train', -> (train_number) { @ua.add_carriage_to_train(train_number) })
     @ui.create_menu_item('Remove carriage from train', -> (train_number, carriage_number) { @ua.remove_carriage_from_train(train_number, carriage_number) })
     @ui.create_menu_item('Move train forward', -> (train_number) { @ua.move_train_forward(train_number) })
@@ -34,9 +37,6 @@ describe 'UserInterface' do
       expect { @ui.select_menu_item('Create new station', 'test') }.to output(message).to_stdout
     end
     it 'should create new trains' do
-      @ui.create_menu_item('Create new passenger train', -> (number=nil) { @ua.create_passenger_train number})
-      @ui.create_menu_item('Create new cargo train', -> (number=nil) { @ua.create_cargo_train number})
-      @ui.create_menu_item('Show existing trains', -> { @ua.show_existing_trains })
       expect { @ui.select_menu_item('Show existing trains') }.to output("There are no trains.\n").to_stdout
       message_1 = "New passenger train created. Its number is: test\n"
       expect { @ui.select_menu_item('Create new passenger train', 'test') }.to output(message_1).to_stdout
