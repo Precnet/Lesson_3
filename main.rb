@@ -115,14 +115,14 @@ class UserActions
     end
   end
 
-  def create_route(first, last, route_number=nil)
+  def create_route(first_station, last_station, route_number=nil)
     no_such_station_message = 'There are no station with such name.'
-    stations_exist = @user_data.stations.keys.include?(first.station_name) && @user_data.stations.keys.include?(last.station_name)
+    stations_exist = @user_data.stations.keys.include?(first_station) && @user_data.stations.keys.include?(last_station)
     raise ArgumentError, no_such_station_message unless stations_exist
     if route_number
-      route = Route.new(first, last, route_number)
+      route = Route.new(first_station, last_station, route_number)
     else
-      route = Route.new(first, last)
+      route = Route.new(first_station, last_station)
     end
     @user_data.routes[route.route_number] = route
     puts "Route '#{route.route_number}' created"
@@ -148,7 +148,7 @@ class UserActions
     # register route and set current station as first station
     @user_data.trains[train_number].set_route(@user_data.routes[route_name])
     # register train at station
-    station_name = @user_data.trains[train_number].current_station.station_name
+    station_name = @user_data.trains[train_number].current_station
     @user_data.stations[station_name].train_arrived(@user_data.trains[train_number])
     puts "Train '#{train_number}' is following route '#{route_name} now'"
   end
@@ -171,23 +171,27 @@ class UserActions
   def move_train_forward(train_number)
     check_train_existence(train_number)
     # current station: unregister train
-    @user_data.trains[train_number].current_station.send_train(train_number)
+    current_station = @user_data.trains[train_number].current_station
+    @user_data.stations[current_station].send_train(train_number)
     # train: move to next station
     @user_data.trains[train_number].move_forward
     # new station: register train
-    @user_data.trains[train_number].current_station.train_arrived(@user_data.trains[train_number])
+    new_station = @user_data.trains[train_number].current_station
+    @user_data.stations[new_station].train_arrived(@user_data.trains[train_number])
     message = 'Train had arrived at next station! Current station is '
-    puts message + "#{@user_data.trains[train_number].current_station.station_name}"
+    puts message + "#{@user_data.trains[train_number].current_station}"
   end
 
   def move_train_backward(train_number)
     check_train_existence(train_number)
     # current station: unregister train
-    @user_data.trains[train_number].current_station.send_train(train_number)
+    current_station = @user_data.trains[train_number].current_station
+    @user_data.stations[current_station].send_train(train_number)
     # train: move to previous station
     @user_data.trains[train_number].move_backward
     # new station: register train
-    @user_data.trains[train_number].current_station.train_arrived(@user_data.trains[train_number])
+    new_station = @user_data.trains[train_number].current_station
+    @user_data.stations[new_station].train_arrived(@user_data.trains[train_number])
     message = 'Train had arrived at previous station! Current station is '
     puts message + "#{@user_data.trains[train_number].current_station.station_name}"
   end
