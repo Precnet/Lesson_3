@@ -37,14 +37,8 @@ class UserInterface
     end
   end
 
-  private
   def create_menu_item(item, command)
     @menu_items[item] = command
-  end
-
-  def select_menu_item(item, args=nil)
-    raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.keys.include?(item)
-    args ? @menu_items[item].call(*args) : @menu_items[item].call
   end
 
   def show_menu
@@ -52,6 +46,13 @@ class UserInterface
     @menu_items.each {|item| puts (@menu_items.find_index(item) + 1).to_s + ' - ' + item[0].to_s }
     puts '______ End ______'
     puts
+  end
+
+  private
+  # these methods should not be called outside of class methods
+  def select_menu_item(item, args=nil)
+    raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.keys.include?(item)
+    args ? @menu_items[item].call(*args) : @menu_items[item].call
   end
 
   def get_user_input
