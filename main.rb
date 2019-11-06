@@ -60,6 +60,7 @@ class UserInterface
     user_action = UserActions.new(user_data)
     create_menu_item('Show existing stations', Proc.new { user_action.show_existing_stations })
     create_menu_item('Create new station', Proc.new { |station_name| user_action.create_station station_name})
+    create_menu_item('Create new route', Proc.new { |first_station, last_station, route_number=nil| user_action.create_route(first_station, last_station, route_number)})
     create_menu_item('Add station to route', Proc.new { |route_name, station_name| user_action.add_station_to_route(route_name, station_name)})
     create_menu_item('Remove station from route', Proc.new { |route_name, station_name| user_action.remove_station_from_route(route_name, station_name)})
     create_menu_item('Add carriage to train', Proc.new { |train_number| user_action.add_carriage_to_train(train_number) })
@@ -226,6 +227,6 @@ class UserData
   end
 end
 
-user_interface = UserInterface.new
-user_interface.create_default_menu
-user_interface.main_loop
+# user_interface = UserInterface.new
+# user_interface.create_default_menu
+# user_interface.main_loop
