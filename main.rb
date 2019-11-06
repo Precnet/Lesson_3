@@ -158,7 +158,7 @@ class UserActions
     # register train at station
     station_name = @user_data.trains[train_number].current_station
     @user_data.stations[station_name].train_arrived(@user_data.trains[train_number])
-    puts "Train '#{train_number}' is following route '#{route_name} now'"
+    puts "Train '#{train_number}' is following route '#{route_name}' now"
   end
 
   def add_carriage_to_train(train_number)
