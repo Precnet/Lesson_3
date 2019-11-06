@@ -35,10 +35,14 @@ class UserInterface
   end
 
   def process_user_input(user_input)
+    user_input = user_input.to_i
     error_message = 'There is no such menu item!'
-    raise ArgumentError, error_message unless (1..@menu_items.length+1).include? user_input.to_i
-    puts 'ok'
-    puts
+    raise ArgumentError, error_message unless (1..@menu_items.length).include? user_input
+    # parameters = @menu_items.keys[user_input]
+  end
+
+  def get_parameters(*parameters)
+
   end
 
   def create_default_menu
