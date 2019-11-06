@@ -15,16 +15,26 @@ class UserInterface
     args ? @menu_items[item].call(*args) : @menu_items[item].call
   end
 
+  def main_loop
+    while true
+      show_menu
+      process_user_input get_user_input
+    end
+  end
+
   def show_menu
-    puts "--- Type index number to select menu item ---\n"
+    puts '--- Main menu ---'
     @menu_items.each {|item| puts (@menu_items.find_index(item) + 1).to_s + ' - ' + item[0].to_s }
+    puts '______ End ______'
+    puts
   end
 
   def get_user_input
-
+    print 'Type index number to select menu item: '
+    gets.strip
   end
 
-  def process_user_input
+  def process_user_input(user_input)
 
   end
 
@@ -201,4 +211,4 @@ end
 
 user_interface = UserInterface.new
 user_interface.create_default_menu
-user_interface.show_menu
+user_interface.main_loop
