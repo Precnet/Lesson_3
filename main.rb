@@ -38,20 +38,30 @@ class UserInterface
     user_input = user_input.to_i
     error_message = 'There is no such menu item!'
     raise ArgumentError, error_message unless (1..@menu_items.length).include? user_input
-    # parameters = @menu_items.keys[user_input]
+    parameters = get_request_parameters @menu_items.values[user_input - 1].parameters
+    p parameters
   end
 
-  def get_parameters(*parameters)
+  def get_request_parameters(parameters)
+    if parameters.length > 0
+      parameters.map { |parameter| get_parameter_from_user parameter[1].to_s }
+    else
+      nil
+    end
+  end
 
+  def get_parameter_from_user(parameter)
+    print "Enter #{parameter.split('_').join(' ')}: "
+    gets.strip
   end
 
   def create_default_menu
     user_data = UserData.new
     user_action = UserActions.new(user_data)
     create_menu_item('Show existing stations', Proc.new { user_action.show_existing_stations })
-    create_menu_item('Create new station', Proc.new { |station| user_action.create_station station})
-    create_menu_item('Add station to route', Proc.new { |route, station| user_action.add_station_to_route(route, station)})
-    create_menu_item('Remove station from route', Proc.new { |route, station| user_action.remove_station_from_route(route, station)})
+    create_menu_item('Create new station', Proc.new { |station_name| user_action.create_station station_name})
+    create_menu_item('Add station to route', Proc.new { |route_name, station_name| user_action.add_station_to_route(route_name, station_name)})
+    create_menu_item('Remove station from route', Proc.new { |route_name, station_name| user_action.remove_station_from_route(route_name, station_name)})
     create_menu_item('Add carriage to train', Proc.new { |train_number| user_action.add_carriage_to_train(train_number) })
     create_menu_item('Remove carriage from train', Proc.new { |train_number, carriage_number| user_action.remove_carriage_from_train(train_number, carriage_number) })
     create_menu_item('Move train forward', Proc.new { |train_number| user_action.move_train_forward(train_number) })
