@@ -11,6 +11,7 @@ describe 'UserInterface' do
     @ui.create_menu_item('Create new route', -> (first, last, number=nil) {@ua.create_route(first, last, number)})
     @ui.create_menu_item('Add station to route', -> (route, station) {@ua.add_station_to_route(route, station)})
     @ui.create_menu_item('Remove station from route', -> (route, station) {@ua.remove_station_from_route(route, station)})
+    @ui.create_menu_item('Add route to train', -> (route, train) { @ua.add_route_to_train(route, train) })
     @ui.create_menu_item('Create new passenger train', -> (number=nil) { @ua.create_passenger_train number})
     @ui.create_menu_item('Create new cargo train', -> (number=nil) { @ua.create_cargo_train number})
     @ui.create_menu_item('Show existing trains', -> { @ua.show_existing_trains })
@@ -88,7 +89,6 @@ describe 'UserInterface' do
     it 'should add route to train' do
       @ui.create_menu_item('Create new passenger train', -> (number=nil) { @ua.create_passenger_train number})
       @ui.select_menu_item('Create new passenger train', 'passenger_train')
-      @ui.create_menu_item('Add route to train', -> (route, train) { @ua.add_route_to_train(route, train) })
       route_name = @ud.routes.keys.first
       train_name = @ud.trains.keys.first
       expect { @ui.select_menu_item('Add route to train', [route_name, 'some_train']) }.to raise_error(ArgumentError)
