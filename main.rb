@@ -1,5 +1,7 @@
 require_relative 'station.rb'
 require_relative 'route.rb'
+require_relative 'passenger_train.rb'
+require_relative 'cargo_train.rb'
 
 class UserInterface
   attr_reader :menu_items
