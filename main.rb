@@ -71,6 +71,7 @@ class UserInterface
     create_menu_item('Create new passenger train', Proc.new { |number=nil| user_action.create_passenger_train number})
     create_menu_item('Create new cargo train', Proc.new { |number=nil| user_action.create_cargo_train number})
     create_menu_item('Show existing trains', Proc.new { user_action.show_existing_trains })
+    create_menu_item('Add route to train', Proc.new { |route, train| user_action.add_route_to_train(route, train) })
     create_menu_item('Add carriage to train', Proc.new { |train_number| user_action.add_carriage_to_train(train_number) })
     create_menu_item('Remove carriage from train', Proc.new { |train_number, carriage_number| user_action.remove_carriage_from_train(train_number, carriage_number) })
     create_menu_item('Move train forward', Proc.new { |train_number| user_action.move_train_forward(train_number) })
