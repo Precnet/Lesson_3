@@ -128,7 +128,11 @@ class Train
   end
 
   # should be private because there is no need to call it in descendants
-  private def previous_station_available?
+  def previous_station_available?
     current_station_index != 0
+  end
+
+  def carriage_correct?(carriage)
+    carriage.respond_to?(:type) && carriage.type == @type
   end
 end
