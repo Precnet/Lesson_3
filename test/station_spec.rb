@@ -18,9 +18,9 @@ describe 'Station' do
       @station = Station.new('some_station')
     end
     it 'should send trains by one' do
-      train_1 = double('Train', train_type: 'cargo', train_number: '001')
-      train_2 = double('Train', train_type: 'passenger', train_number: '002')
-      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      train_1 = double('Train', train_type: 'cargo', number: '001')
+      train_2 = double('Train', train_type: 'passenger', number: '002')
+      train_3 = double('Train', train_type: 'cargo', number: '003')
       @station.train_arrived(train_1)
       @station.train_arrived(train_2)
       @station.train_arrived(train_3)
@@ -33,9 +33,9 @@ describe 'Station' do
       expect { @station.send_train('some_value') }.to raise_error(ArgumentError)
     end
     it 'should add trains to station one by one' do
-      train_1 = double('Train', train_type: 'cargo', train_number: '001')
-      train_2 = double('Train', train_type: 'passenger', train_number: '002')
-      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      train_1 = double('Train', train_type: 'cargo', number: '001')
+      train_2 = double('Train', train_type: 'passenger', number: '002')
+      train_3 = double('Train', train_type: 'cargo', number: '003')
       @station.train_arrived(train_1)
       expect(@station.trains_at_station.length).to eq(1)
       @station.train_arrived(train_2)
@@ -48,9 +48,9 @@ describe 'Station' do
       @station.send_train('003')
     end
     it 'should return trains currently at station' do
-      train_1 = double('Train', train_type: 'cargo', train_number: '001')
-      train_2 = double('Train', train_type: 'passenger', train_number: '002')
-      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      train_1 = double('Train', train_type: 'cargo', number: '001')
+      train_2 = double('Train', train_type: 'passenger', number: '002')
+      train_3 = double('Train', train_type: 'cargo', number: '003')
       @station.train_arrived(train_1)
       @station.train_arrived(train_2)
       @station.train_arrived(train_3)
@@ -61,9 +61,9 @@ describe 'Station' do
       expect(@station.trains_at_station).to eq([])
     end
     it 'should display trains of type' do
-      train_1 = double('Train', train_type: 'cargo', train_number: '001')
-      train_2 = double('Train', train_type: 'passenger', train_number: '002')
-      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      train_1 = double('Train', train_type: 'cargo', number: '001')
+      train_2 = double('Train', train_type: 'passenger', number: '002')
+      train_3 = double('Train', train_type: 'cargo', number: '003')
       @station.train_arrived(train_1)
       @station.train_arrived(train_2)
       @station.train_arrived(train_3)
@@ -75,9 +75,9 @@ describe 'Station' do
       @station.send_train('003')
     end
     it 'should display trains by type' do
-      train_1 = double('Train', train_type: 'cargo', train_number: '001')
-      train_2 = double('Train', train_type: 'passenger', train_number: '002')
-      train_3 = double('Train', train_type: 'cargo', train_number: '003')
+      train_1 = double('Train', train_type: 'cargo', number: '001')
+      train_2 = double('Train', train_type: 'passenger', number: '002')
+      train_3 = double('Train', train_type: 'cargo', number: '003')
       @station.train_arrived(train_1)
       @station.train_arrived(train_2)
       @station.train_arrived(train_3)

@@ -105,14 +105,14 @@ class UserActions
 
   def create_cargo_train(train_number=nil)
     train = train_number ? CargoTrain.new(train_number) : CargoTrain.new
-    @user_data.trains[train.train_number] = train
-    puts "New cargo train created. Its number is: #{train.train_number}"
+    @user_data.trains[train.number] = train
+    puts "New cargo train created. Its number is: #{train.number}"
   end
 
   def create_passenger_train(train_number=nil)
     train = train_number ? PassengerTrain.new(train_number) : PassengerTrain.new
-    @user_data.trains[train.train_number] = train
-    puts "New passenger train created. Its number is: #{train.train_number}"
+    @user_data.trains[train.number] = train
+    puts "New passenger train created. Its number is: #{train.number}"
   end
 
   def show_existing_trains

@@ -6,12 +6,12 @@ describe Train do
   context '#initialize' do
     it 'should create object with custom train number' do
       train = Train.new('cargo', 10, 'some_name')
-      expect(train.train_number).to eq('some_name')
+      expect(train.number).to eq('some_name')
     end
     it 'should create random name if no one was provided' do
       train_1 = Train.new('cargo', 10)
       train_2 = Train.new('cargo', 10)
-      expect(train_1.train_number).not_to eq(train_2.train_number)
+      expect(train_1.number).not_to eq(train_2.number)
     end
     it 'should create Trains with positive Integer number of carriages' do
       train = Train.new('cargo', 10)

@@ -18,7 +18,7 @@ class Station
   end
 
   def trains_at_station_of_type(train_type)
-    @trains_at_station.select {|train| train if train.train_type == train_type}.map { |train| train.train_number}
+    @trains_at_station.select {|train| train if train.train_type == train_type}.map { |train| train.number}
   end
 
   def trains_at_station_by_type
@@ -38,10 +38,10 @@ class Station
   end
 
   def train_at_station?(train_number)
-    @trains_at_station.map { |train| train.train_number }.include? train_number
+    @trains_at_station.map { |train| train.number }.include? train_number
   end
 
   def get_train_index_by(train_name)
-    @trains_at_station.map { |train| train.train_number }.find_index(train_name)
+    @trains_at_station.map { |train| train.number }.find_index(train_name)
   end
 end
