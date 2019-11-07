@@ -92,7 +92,7 @@ describe 'UserInterface' do
       route_name = @ud.routes.keys.first
       train_name = @ud.trains.keys.first
       expect { @ui.select_menu_item('Add route to train', [route_name, 'some_train']) }.to raise_error(ArgumentError)
-      message = "Train '#{train_name}' is following route '#{route_name} now'\n"
+      message = "Train '#{train_name}' is following route '#{route_name}' now\n"
       expect { @ui.select_menu_item('Add route to train', [route_name, train_name]) }.to output(message).to_stdout
     end
   end
