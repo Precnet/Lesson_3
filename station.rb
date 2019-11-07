@@ -18,12 +18,12 @@ class Station
   end
 
   def trains_at_station_of_type(train_type)
-    @trains_at_station.select {|train| train if train.train_type == train_type}.map { |train| train.number}
+    @trains_at_station.select {|train| train if train.type == train_type}.map { |train| train.number}
   end
 
   def trains_at_station_by_type
     result = {}
-    trains_at_station_types = @trains_at_station.map { |train| train.train_type}
+    trains_at_station_types = @trains_at_station.map { |train| train.type}
     trains_at_station_types.uniq.each {|type| result[type] = trains_at_station_types.count(type)}
     result
   end

@@ -3,12 +3,12 @@
 TRAIN_TYPES = %w(passenger cargo)
 
 class Train
-  attr_reader :number, :train_type, :current_speed, :current_station, :number_of_carriages, :route
+  attr_reader :number, :type, :current_speed, :current_station, :number_of_carriages, :route
 
   def initialize(train_type, number_of_carriages, train_number = generate_train_number(10))
     @number = train_number
     @number_of_carriages = check_number_of_carriages(number_of_carriages)
-    @train_type = check_train_type(train_type)
+    @type = check_train_type(train_type)
     @current_speed = 0
     @current_station = nil
     @route = nil

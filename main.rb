@@ -117,10 +117,10 @@ class UserActions
 
   def show_existing_trains
     if @user_data.trains.length > 0
-      passenger_trains = @user_data.trains.select { |_, train| train.train_type == 'passenger'}
+      passenger_trains = @user_data.trains.select { |_, train| train.type == 'passenger'}
       passenger_trains = passenger_trains.map {|name, train| name + '(' + train.carriages.map{|carriage| carriage.number}.join(',') + ')'}
       puts 'There are next passenger trains: ' + passenger_trains.compact.join(',')
-      cargo_trains = @user_data.trains.select { |_, train| train.train_type == 'cargo'}
+      cargo_trains = @user_data.trains.select { |_, train| train.type == 'cargo'}
       cargo_trains = cargo_trains.map {|name, train| name + '(' + train.carriages.map{|carriage| carriage.number}.join(',') + ')'}
       puts 'There are next cargo trains: ' + cargo_trains.compact.join(',')
     else
@@ -168,7 +168,7 @@ class UserActions
 
   def add_carriage_to_train(train_number)
     check_train_existence(train_number)
-    carriage_type = @user_data.trains[train_number].train_type
+    carriage_type = @user_data.trains[train_number].type
     carriage = carriage_type == 'cargo' ? CargoCarriage.new : PassengerCarriage.new
     @user_data.trains[train_number].add_carriage(carriage)
     puts "#{carriage_type.capitalize} carriage was added to train '#{train_number}'"
