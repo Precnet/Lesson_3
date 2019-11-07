@@ -45,7 +45,7 @@ describe 'UserInterface' do
       expect { @ui.select_menu_item('Create new cargo train', '1234') }.to output(message_2).to_stdout
       @ui.select_menu_item('Create new cargo train', '4321')
       @ui.select_menu_item('Show existing trains')
-      message_3 = "There are next passenger trains: test\nThere are next cargo trains: 1234,4321\n"
+      message_3 = "There are next passenger trains: test()\nThere are next cargo trains: 1234(),4321()\n"
       expect { @ui.select_menu_item('Show existing trains') }.to output(message_3).to_stdout
     end
   end

@@ -48,13 +48,14 @@ class UserInterface
     puts
   end
 
-  private
-  # these methods should not be called outside of class methods
   def select_menu_item(item, args=nil)
     raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.keys.include?(item)
     args ? @menu_items[item].call(*args) : @menu_items[item].call
   end
 
+  private
+
+  # these methods should not be called outside of class methods
   def get_user_input
     print 'Type index number to select menu item: '
     gets.strip
@@ -244,6 +245,6 @@ class UserData
   end
 end
 
-user_interface = UserInterface.new
-user_interface.create_default_menu
-user_interface.main_loop
+# user_interface = UserInterface.new
+# user_interface.create_default_menu
+# user_interface.main_loop
