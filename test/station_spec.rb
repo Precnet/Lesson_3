@@ -4,7 +4,7 @@ require_relative '../station.rb'
 describe 'Station' do
   it 'should create station with custom name' do
     station = Station.new('first_station_ever')
-    expect(station.station_name).to eq('first_station_ever')
+    expect(station.name).to eq('first_station_ever')
   end
   it 'shouldn`t create station with incorrect name' do
     expect { Station.new(nil) }.to raise_error(ArgumentError)

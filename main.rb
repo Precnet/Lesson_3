@@ -90,8 +90,8 @@ class UserActions
 
   def create_station(station_name)
     station = Station.new(station_name)
-    @user_data.stations[station.station_name] = station
-    puts "Created station: #{station.station_name}"
+    @user_data.stations[station.name] = station
+    puts "Created station: #{station.name}"
   end
 
   def show_existing_stations
