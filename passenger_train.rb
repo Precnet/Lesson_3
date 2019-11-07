@@ -28,12 +28,4 @@ class PassengerTrain < Train
   def number_of_carriages
     @carriages.length
   end
-
-  private
-
-  # this method is only called to check new carriage for validity and should not be called directly
-  def carriage_correct?(carriage)
-    carriage.respond_to?(:type) && carriage.type == 'passenger'
-  end
-
 end
