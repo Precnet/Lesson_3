@@ -117,10 +117,10 @@ class UserActions
   def show_existing_trains
     if @user_data.trains.length > 0
       passenger_trains = @user_data.trains.select { |_, train| train.train_type == 'passenger'}
-      passenger_trains = passenger_trains.map {|name, train| name + '(' + train.carriages.map{|carriage| carriage.carriage_number}.join(',') + ')'}
+      passenger_trains = passenger_trains.map {|name, train| name + '(' + train.carriages.map{|carriage| carriage.number}.join(',') + ')'}
       puts 'There are next passenger trains: ' + passenger_trains.compact.join(',')
       cargo_trains = @user_data.trains.select { |_, train| train.train_type == 'cargo'}
-      cargo_trains = cargo_trains.map {|name, train| name + '(' + train.carriages.map{|carriage| carriage.carriage_number}.join(',') + ')'}
+      cargo_trains = cargo_trains.map {|name, train| name + '(' + train.carriages.map{|carriage| carriage.number}.join(',') + ')'}
       puts 'There are next cargo trains: ' + cargo_trains.compact.join(',')
     else
       puts 'There are no trains.'
@@ -230,7 +230,7 @@ class UserActions
 
   def check_train_has_such_carriage(train_number, carriage_number)
     error_message = "Train '#{train_number}' has no carriages with number '#{carriage_number}'"
-    has_carriage = @user_data.trains[train_number].carriages.map{|carriage| carriage.carriage_number}.include?(carriage_number)
+    has_carriage = @user_data.trains[train_number].carriages.map{|carriage| carriage.number}.include?(carriage_number)
     raise ArgumentError, error_message unless has_carriage
   end
 end

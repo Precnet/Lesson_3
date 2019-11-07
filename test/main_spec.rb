@@ -108,7 +108,7 @@ describe 'UserInterface' do
     end
     it 'should remove carriage from train' do
       expect { @ui.select_menu_item('Remove carriage from train', ['test', 'smth']) }.to raise_error(ArgumentError)
-      carriage_number = @ud.trains['test'].carriages[0].carriage_number
+      carriage_number = @ud.trains['test'].carriages[0].number
       message = "Carriage '#{carriage_number}' was removed from train 'test'\n"
       expect(@ud.trains['test'].number_of_carriages).to eq(2)
       expect { @ui.select_menu_item('Remove carriage from train', ['test', carriage_number]) }.to output(message).to_stdout

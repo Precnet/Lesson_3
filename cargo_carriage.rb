@@ -3,11 +3,11 @@ class CargoCarriage
   BASE_36 = 36
   CARRIAGE_TYPE = 'cargo'
 
-  attr_reader :carriage_type, :carriage_number
+  attr_reader :type, :number
 
   def initialize(carriage_number=generate_carriage_number(NUMBER_LENGTH))
-    @carriage_type = CARRIAGE_TYPE
-    @carriage_number = carriage_number
+    @type = CARRIAGE_TYPE
+    @number = carriage_number
   end
 
   private

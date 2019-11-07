@@ -16,8 +16,8 @@ describe 'CargoTrain' do
       @train = CargoTrain.new
     end
     it 'should add new carriages' do
-      carriage = double('CargoCarriage', carriage_type: 'cargo')
-      wrong_carriage = double('PassengerCarriage', carriage_type: 'passenger')
+      carriage = double('CargoCarriage', type: 'cargo')
+      wrong_carriage = double('PassengerCarriage', type: 'passenger')
       @train.add_carriage(carriage)
       expect(@train.carriages.length).to eq(1)
       @train.add_carriage(carriage)

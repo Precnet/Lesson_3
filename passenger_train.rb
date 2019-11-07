@@ -21,8 +21,8 @@ class PassengerTrain < Train
 
   def remove_carriage(carriage_number)
     error_message = 'There are no such carriages.'
-    raise ArgumentError, error_message unless @carriages.map { |carriage| carriage.carriage_number}.include?(carriage_number)
-    @carriages.reject! { |carriage| carriage.carriage_number == carriage_number }
+    raise ArgumentError, error_message unless @carriages.map { |carriage| carriage.number}.include?(carriage_number)
+    @carriages.reject! { |carriage| carriage.number == carriage_number }
   end
 
   def number_of_carriages
@@ -32,7 +32,7 @@ class PassengerTrain < Train
   private
   # this method is only called to check new carriage for validity and should not be called directly
   def carriage_correct?(carriage)
-    carriage.respond_to?(:carriage_type) && carriage.carriage_type == 'passenger'
+    carriage.respond_to?(:type) && carriage.type == 'passenger'
   end
 
 end
