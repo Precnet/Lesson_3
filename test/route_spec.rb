@@ -27,8 +27,8 @@ describe 'Route' do
   it 'should create route name of use one of users choice' do
     route_2 = Route.new('one', 'two', '12345')
     route_3 = Route.new('one', 'two')
-    expect(route_2.route_number).to eq('12345')
-    expect(route_2.route_number).not_to eq(@route.route_number)
-    expect(route_3.route_number).not_to eq(@route.route_number)
+    expect(route_2.number).to eq('12345')
+    expect(route_2.number).not_to eq(@route.number)
+    expect(route_3.number).not_to eq(@route.number)
   end
 end

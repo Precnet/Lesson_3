@@ -119,7 +119,7 @@ describe 'UserInterface' do
     it 'should move train forward and backward' do
       message_forward = "Train had arrived at next station! Current station is last\n"
       expect { @ui.select_menu_item('Move train forward', 'test') }.to output(message_forward).to_stdout
-      route_name = @ud.trains['test'].route.route_number
+      route_name = @ud.trains['test'].route.number
       @ui.select_menu_item('Add station to route', [route_name, 'middle_1'])
       message_backward = "Train had arrived at previous station! Current station is middle_1\n"
       puts @ud.trains

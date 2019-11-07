@@ -137,8 +137,8 @@ class UserActions
     else
       route = Route.new(first_station, last_station)
     end
-    @user_data.routes[route.route_number] = route
-    puts "Route '#{route.route_number}' created"
+    @user_data.routes[route.number] = route
+    puts "Route '#{route.number}' created"
   end
 
   def add_station_to_route(route_name, station_name)

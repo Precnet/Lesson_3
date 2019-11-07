@@ -1,9 +1,9 @@
 class Route
-  attr_reader :stations, :route_number
+  attr_reader :stations, :number
 
   def initialize(first_station, last_station, route_number=generate_route_number(5))
     @stations = [first_station, last_station]
-    @route_number = route_number
+    @number = route_number
   end
 
   def add_station(new_station)
