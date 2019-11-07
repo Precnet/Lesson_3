@@ -19,6 +19,7 @@ class Route
   end
 
   private
+
   def generate_route_number(number_length)
     rand(36 ** number_length).to_s(36)
   end

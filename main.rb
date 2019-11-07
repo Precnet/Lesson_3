@@ -217,6 +217,7 @@ class UserActions
   end
 
   private
+
   def check_route_existence(route_name)
     raise ArgumentError, "No such route #{route_name}" unless @user_data.routes.keys.include? route_name
   end

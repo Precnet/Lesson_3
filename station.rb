@@ -29,6 +29,7 @@ class Station
   end
 
   private
+
   def check_station_name(name)
     raise ArgumentError, 'Station name can`t be nil!' unless name
     raise ArgumentError, 'Station name should be of String class!' unless name.is_a?(String)
