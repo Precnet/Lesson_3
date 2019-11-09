@@ -3,7 +3,7 @@ require_relative 'train.rb'
 class PassengerTrain < Train
   attr_reader :carriages
 
-  def initialize(train_number=nil)
+  def initialize(train_number)
     if train_number
       super(train_type='passenger', number_of_carriages=0, train_number=train_number)
     else
