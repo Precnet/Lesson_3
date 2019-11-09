@@ -4,7 +4,7 @@ class CargoTrain < Train
   attr_reader :carriages
 
   def initialize(train_number)
-    if train_number
+    if train_number && train_number.length > 0
       super(train_type='cargo', number_of_carriages=0, train_number=train_number)
     else
       super(train_type='cargo', number_of_carriages=0)
