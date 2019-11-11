@@ -8,12 +8,13 @@ require_relative 'cargo_carriage.rb'
 class UserInterface
   attr_reader :menu_items
   def initialize
-    @menu_items = {}
+    @user_data = UserData.new
+    @user_action = UserActions.new(@user_data)
+    @menu_items = @user_action.methods - Object.methods
   end
 
   def create_default_menu
-    user_data = UserData.new
-    user_action = UserActions.new(user_data)
+
     # create_menu_item('Show existing stations', Proc.new { user_action.show_existing_stations })
     # create_menu_item('Create new station', Proc.new { |station_name| user_action.create_station station_name})
     # create_menu_item('Create new route', Proc.new { |first_station, last_station, route_number=nil| user_action.create_route(first_station, last_station, route_number)})
@@ -29,7 +30,8 @@ class UserInterface
     # create_menu_item('Move train backward', Proc.new { |train_number| user_action.move_train_backward(train_number) })
     # create_menu_item('Show trains at station', Proc.new { |station_name| user_action.show_trains_at_station(station_name) })
 
-    (user_action.methods - Object.methods).map{ |method| @menu_items[method.to_s.capitalize.gsub('_', ' ')] = method }
+
+    p @menu_items
   end
 
   def main_loop
@@ -45,14 +47,15 @@ class UserInterface
 
   def show_menu
     puts '--- Main menu ---'
-    @menu_items.each {|item| puts(@menu_items.find_index(item) + 1).to_s + ' - ' + item[0].to_s }
+    @menu_items.each_with_index {|item, index| puts((index + 1).to_s + ' - ' + item.to_s.capitalize.gsub('_', ' ')) }
     puts '______ End ______'
     puts
   end
 
   def select_menu_item(item, args=nil)
-    raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.keys.include?(item)
-    args ? @menu_items[item].call(*args) : @menu_items[item].call
+    raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.include?(item)
+    # args ? @menu_items[item].call(*args) : @menu_items[item].call
+    args ? @user_action.send(item, args) : @user_action.send(item)
   end
 
   private
@@ -67,8 +70,8 @@ class UserInterface
     user_input = user_input.to_i
     error_message = 'There is no such menu item!'
     raise ArgumentError, error_message unless (1..@menu_items.length).include? user_input
-    parameters = get_request_parameters @menu_items.values[user_input - 1].parameters
-    select_menu_item(@menu_items.keys[user_input - 1], parameters)
+    parameters = get_request_parameters @user_action.method(@menu_items[user_input - 1]).parameters
+    select_menu_item(@menu_items[user_input - 1], parameters)
   end
 
   def get_request_parameters(parameters)
@@ -250,4 +253,4 @@ end
 
 user_interface = UserInterface.new
 user_interface.create_default_menu
-# user_interface.main_loop
+user_interface.main_loop
