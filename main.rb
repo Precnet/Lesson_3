@@ -29,7 +29,7 @@ class UserInterface
     # create_menu_item('Move train backward', Proc.new { |train_number| user_action.move_train_backward(train_number) })
     # create_menu_item('Show trains at station', Proc.new { |station_name| user_action.show_trains_at_station(station_name) })
 
-    p user_action.methods - Object.methods
+    (user_action.methods - Object.methods).map{ |method| @menu_items[method.to_s.capitalize.gsub('_', ' ')] = method }
   end
 
   def main_loop
