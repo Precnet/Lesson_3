@@ -10,28 +10,10 @@ class UserInterface
   def initialize
     @user_data = UserData.new
     @user_action = UserActions.new(@user_data)
-    @menu_items = @user_action.methods - Object.methods
   end
 
   def create_default_menu
-
-    # create_menu_item('Show existing stations', Proc.new { user_action.show_existing_stations })
-    # create_menu_item('Create new station', Proc.new { |station_name| user_action.create_station station_name})
-    # create_menu_item('Create new route', Proc.new { |first_station, last_station, route_number=nil| user_action.create_route(first_station, last_station, route_number)})
-    # create_menu_item('Add station to route', Proc.new { |route_name, station_name| user_action.add_station_to_route(route_name, station_name)})
-    # create_menu_item('Remove station from route', Proc.new { |route_name, station_name| user_action.remove_station_from_route(route_name, station_name)})
-    # create_menu_item('Create new passenger train', Proc.new { |number=nil| user_action.create_passenger_train number})
-    # create_menu_item('Create new cargo train', Proc.new { |number=nil| user_action.create_cargo_train number})
-    # create_menu_item('Show existing trains', Proc.new { user_action.show_existing_trains })
-    # create_menu_item('Add route to train', Proc.new { |route, train| user_action.add_route_to_train(route, train) })
-    # create_menu_item('Add carriage to train', Proc.new { |train_number| user_action.add_carriage_to_train(train_number) })
-    # create_menu_item('Remove carriage from train', Proc.new { |train_number, carriage_number| user_action.remove_carriage_from_train(train_number, carriage_number) })
-    # create_menu_item('Move train forward', Proc.new { |train_number| user_action.move_train_forward(train_number) })
-    # create_menu_item('Move train backward', Proc.new { |train_number| user_action.move_train_backward(train_number) })
-    # create_menu_item('Show trains at station', Proc.new { |station_name| user_action.show_trains_at_station(station_name) })
-
-
-    p @menu_items
+    @menu_items = (@user_action.methods - Object.methods).sort
   end
 
   def main_loop
@@ -54,8 +36,7 @@ class UserInterface
 
   def select_menu_item(item, args=nil)
     raise ArgumentError, "No such menu item: #{item}!" unless @menu_items.include?(item)
-    # args ? @menu_items[item].call(*args) : @menu_items[item].call
-    args ? @user_action.send(item, args) : @user_action.send(item)
+    args ? @user_action.send(item, *args) : @user_action.send(item)
   end
 
   private
@@ -137,7 +118,7 @@ class UserActions
     no_such_station_message = 'There are no station with such name.'
     stations_exist = @user_data.stations.keys.include?(first_station) && @user_data.stations.keys.include?(last_station)
     raise ArgumentError, no_such_station_message unless stations_exist
-    if route_number
+    if route_number && route_number.length > 0
       route = Route.new(first_station, last_station, route_number)
     else
       route = Route.new(first_station, last_station)
