@@ -13,7 +13,7 @@ class UserInterface
   end
 
   def create_default_menu
-    @menu_items = (@user_action.methods - Object.methods).sort
+    @menu_items = UserActions.instance_methods(include_super = false).sort
   end
 
   def main_loop
